@@ -1,0 +1,23 @@
+---
+title: "STAT 380 Final Project"
+author: "Tristan Zanowic, Evan Spinney, Julian Sim"
+output: html_notebook
+---
+
+# Front Matter
+```{r}
+library(tidyverse)
+library(Lahman)
+library(reshape2)
+library(mdsr)
+library(mvtnorm)
+library(factoextra)
+library(cluster)
+```
+
+# Loading the Data
+```{r}
+CovidDaily <- read.csv("WHO-COVID-19-global-data.csv")
+CovidRates <- read.csv("WHO-COVID-19-global-table-data.csv")
+VaccineData <- read.csv("vaccination-data.csv")
+```
