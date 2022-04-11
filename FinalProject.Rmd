@@ -13,11 +13,14 @@ library(mdsr)
 library(mvtnorm)
 library(factoextra)
 library(cluster)
+
 ```
 
 # Loading the Data
 ```{r}
 CovidDaily <- read.csv("WHO-COVID-19-global-data.csv")
-CovidRates <- read.csv("WHO-COVID-19-global-table-data.csv")
+CovidRates <- read.csv("WHO-COVID-19-global-table-data.csv", header = TRUE)
+  names(CovidRates)[1:(ncol(CovidRates)-1)] <- names(CovidRates)[2:ncol(CovidRates)]
+  CovidRates[, ncol(CovidRates)] <- NULL
 VaccineData <- read.csv("vaccination-data.csv")
 ```

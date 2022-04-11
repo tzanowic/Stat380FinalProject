@@ -221,31 +221,45 @@ pre code {
 <h1>Front Matter</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KExhaG1hbilcbmxpYnJhcnkocmVzaGFwZTIpXG5saWJyYXJ5KG1kc3IpXG5saWJyYXJ5KG12dG5vcm0pXG5saWJyYXJ5KGZhY3RvZXh0cmEpXG5saWJyYXJ5KGNsdXN0ZXIpXG5gYGAifQ== -->
-<pre class="r"><code>library(tidyverse)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KExhaG1hbilcbmxpYnJhcnkocmVzaGFwZTIpXG5saWJyYXJ5KG1kc3IpXG5saWJyYXJ5KG12dG5vcm0pXG5saWJyYXJ5KGZhY3RvZXh0cmEpXG5saWJyYXJ5KGNsdXN0ZXIpXG5gYGBcbmBgYCJ9 -->
+<pre class="r"><code>```r
+library(tidyverse)
 library(Lahman)
 library(reshape2)
 library(mdsr)
 library(mvtnorm)
 library(factoextra)
 library(cluster)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="loading-the-data" class="section level1">
-<h1>Loading the Data</h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ292aWREYWlseSA8LSByZWFkLmNzdihcIldITy1DT1ZJRC0xOS1nbG9iYWwtZGF0YS5jc3ZcIilcbkNvdmlkUmF0ZXMgPC0gcmVhZC5jc3YoXCJXSE8tQ09WSUQtMTktZ2xvYmFsLXRhYmxlLWRhdGEuY3N2XCIpXG5WYWNjaW5lRGF0YSA8LSByZWFkLmNzdihcInZhY2NpbmF0aW9uLWRhdGEuY3N2XCIpXG5gYGAifQ== -->
-<pre class="r"><code>CovidDaily &lt;- read.csv(&quot;WHO-COVID-19-global-data.csv&quot;)
-CovidRates &lt;- read.csv(&quot;WHO-COVID-19-global-table-data.csv&quot;)
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+# Loading the Data
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ292aWREYWlseSA8LSByZWFkLmNzdihcIldITy1DT1ZJRC0xOS1nbG9iYWwtZGF0YS5jc3ZcIilcbkNvdmlkUmF0ZXMgPC0gcmVhZC5jc3YoXCJXSE8tQ09WSUQtMTktZ2xvYmFsLXRhYmxlLWRhdGEuY3N2XCIsIGhlYWRlciA9IFRSVUUpXG4gIG5hbWVzKENvdmlkUmF0ZXMpWzE6KG5jb2woQ292aWRSYXRlcyktMSldIDwtIG5hbWVzKENvdmlkUmF0ZXMpWzI6bmNvbChDb3ZpZFJhdGVzKV1cbiAgQ292aWRSYXRlc1ssIG5jb2woQ292aWRSYXRlcyldIDwtIE5VTExcblZhY2NpbmVEYXRhIDwtIHJlYWQuY3N2KFwidmFjY2luYXRpb24tZGF0YS5jc3ZcIilcbmBgYCJ9 --&gt;
+
+```r
+CovidDaily &lt;- read.csv(&quot;WHO-COVID-19-global-data.csv&quot;)
+CovidRates &lt;- read.csv(&quot;WHO-COVID-19-global-table-data.csv&quot;, header = TRUE)
+  names(CovidRates)[1:(ncol(CovidRates)-1)] &lt;- names(CovidRates)[2:ncol(CovidRates)]
+  CovidRates[, ncol(CovidRates)] &lt;- NULL
 VaccineData &lt;- read.csv(&quot;vaccination-data.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAzODAgRmluYWwgUHJvamVjdCIKYXV0aG9yOiAiVHJpc3RhbiBaYW5vd2ljLCBFdmFuIFNwaW5uZXksIEp1bGlhbiBTaW0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMgRnJvbnQgTWF0dGVyCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShMYWhtYW4pCmxpYnJhcnkocmVzaGFwZTIpCmxpYnJhcnkobWRzcikKbGlicmFyeShtdnRub3JtKQpsaWJyYXJ5KGZhY3RvZXh0cmEpCmxpYnJhcnkoY2x1c3RlcikKYGBgCgojIExvYWRpbmcgdGhlIERhdGEKYGBge3J9CkNvdmlkRGFpbHkgPC0gcmVhZC5jc3YoIldITy1DT1ZJRC0xOS1nbG9iYWwtZGF0YS5jc3YiKQpDb3ZpZFJhdGVzIDwtIHJlYWQuY3N2KCJXSE8tQ09WSUQtMTktZ2xvYmFsLXRhYmxlLWRhdGEuY3N2IikKVmFjY2luZURhdGEgPC0gcmVhZC5jc3YoInZhY2NpbmF0aW9uLWRhdGEuY3N2IikKYGBg</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAzODAgRmluYWwgUHJvamVjdCIKYXV0aG9yOiAiVHJpc3RhbiBaYW5vd2ljLCBFdmFuIFNwaW5uZXksIEp1bGlhbiBTaW0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMgRnJvbnQgTWF0dGVyCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShMYWhtYW4pCmxpYnJhcnkocmVzaGFwZTIpCmxpYnJhcnkobWRzcikKbGlicmFyeShtdnRub3JtKQpsaWJyYXJ5KGZhY3RvZXh0cmEpCmxpYnJhcnkoY2x1c3RlcikKCmBgYAoKIyBMb2FkaW5nIHRoZSBEYXRhCmBgYHtyfQpDb3ZpZERhaWx5IDwtIHJlYWQuY3N2KCJXSE8tQ09WSUQtMTktZ2xvYmFsLWRhdGEuY3N2IikKQ292aWRSYXRlcyA8LSByZWFkLmNzdigiV0hPLUNPVklELTE5LWdsb2JhbC10YWJsZS1kYXRhLmNzdiIsIGhlYWRlciA9IFRSVUUpCiAgbmFtZXMoQ292aWRSYXRlcylbMToobmNvbChDb3ZpZFJhdGVzKS0xKV0gPC0gbmFtZXMoQ292aWRSYXRlcylbMjpuY29sKENvdmlkUmF0ZXMpXQogIENvdmlkUmF0ZXNbLCBuY29sKENvdmlkUmF0ZXMpXSA8LSBOVUxMClZhY2NpbmVEYXRhIDwtIHJlYWQuY3N2KCJ2YWNjaW5hdGlvbi1kYXRhLmNzdiIpCmBgYA==</div>
 
 
 
