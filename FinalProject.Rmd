@@ -19,8 +19,20 @@ library(cluster)
 # Loading the Data
 ```{r}
 CovidDaily <- read.csv("WHO-COVID-19-global-data.csv")
-CovidRates <- read.csv("WHO-COVID-19-global-table-data.csv", header = TRUE)
-  names(CovidRates)[1:(ncol(CovidRates)-1)] <- names(CovidRates)[2:ncol(CovidRates)]
-  CovidRates[, ncol(CovidRates)] <- NULL
+CumulativeCovid <- read.csv("CumulativeCovid.csv") %>%
 VaccineData <- read.csv("vaccination-data.csv")
+GDPpCapita <- read.csv("API_NY.GDP.PCAP.CD_DS2_en_csv_v2_3930492.csv")
+UrbanPop <- read.csv("API_SP.URB.TOTL.IN.ZS_DS2_en_csv_v2_3930188.csv")
+```
+
+```{r}
+# Merging GDP and UrbanPop data 
+CountryNumbers <-
+  inner_join(GDPpCapita, UrbanPop, by = "Country.Name") %>%
+  dplyr::rename(urbpop = X2020, gdpcap = X2020_GDP_per_Capita, Name = Country.Name)
+```
+
+```{r}
+# Merging Numbers and Covid Rates
+inner_join(CountryNumbers, CumulativeCovid, by = "Name")
 ```
