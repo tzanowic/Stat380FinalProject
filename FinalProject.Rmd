@@ -19,7 +19,7 @@ library(cluster)
 # Loading the Data
 ```{r}
 CovidDaily <- read.csv("WHO-COVID-19-global-data.csv")
-CumulativeCovid <- read.csv("CumulativeCovid.csv") %>%
+CumulativeCovid <- read.csv("WHO-COVID-19-global-table-data (2).csv")
 VaccineData <- read.csv("vaccination-data.csv")
 GDPpCapita <- read.csv("API_NY.GDP.PCAP.CD_DS2_en_csv_v2_3930492.csv")
 UrbanPop <- read.csv("API_SP.URB.TOTL.IN.ZS_DS2_en_csv_v2_3930188.csv")
@@ -33,13 +33,13 @@ CountryNumbers <-
 ```
 
 
-*** NEED TO CHANGE SOME COUNTRY NAMES TO MATCH ***
 ```{r}
 # Merging Numbers and Covid Rates 
 FullStats <-
   inner_join(CountryNumbers, CumulativeCovid, by = "Name") %>%
   mutate(deathrate = Deaths...cumulative.total/Cases...cumulative.total) %>%
-  dplyr::rename(totalcases = Cases...cumulative.total, totaldeaths = Deaths...cumulative.total)
+  dplyr::rename(totalcases = Cases...cumulative.total, totaldeaths = Deaths...cumulative.total) %>%
+  mutate_all(na_if, "")
 ```
 
 
