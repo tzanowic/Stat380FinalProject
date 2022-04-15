@@ -58,8 +58,16 @@ FullStats %>%
 FullStats %>%
   ggplot(aes(x = as.factor(gdpcap), y = deathrate, na.rm = TRUE)) +
   geom_point(aes(color = WHO.Region)) 
+FullStats %>%
+  ggplot(aes(x = (urbpop), y = deathrate, na.rm = TRUE)) +
+  geom_point(aes(color = WHO.Region)) 
 ```
 
+### Identifying Outliers
+
+```{r}
+# YEMEN
+```
 
 
 
