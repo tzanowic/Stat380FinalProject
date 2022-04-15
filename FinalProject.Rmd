@@ -32,7 +32,36 @@ CountryNumbers <-
   dplyr::rename(urbpop = X2020, gdpcap = X2020_GDP_per_Capita, Name = Country.Name)
 ```
 
+
+*** NEED TO CHANGE SOME COUNTRY NAMES TO MATCH ***
 ```{r}
-# Merging Numbers and Covid Rates
-inner_join(CountryNumbers, CumulativeCovid, by = "Name")
+# Merging Numbers and Covid Rates 
+FullStats <-
+  inner_join(CountryNumbers, CumulativeCovid, by = "Name") %>%
+  mutate(deathrate = Deaths...cumulative.total/Cases...cumulative.total) %>%
+  dplyr::rename(totalcases = Cases...cumulative.total, totaldeaths = Deaths...cumulative.total)
 ```
+
+
+# EDA
+
+```{r}
+# Exploring COVID RATES
+FullStats %>%
+  group_by(WHO.Region) %>%
+  summarise(countries = n(), avgcovidcases = mean(totalcases), avgcoviddeaths = mean(totaldeaths), deathrate = (avgcoviddeaths/avgcovidcases))
+```
+
+*** CONVERT GDP TO NUMBER WITHOUT DOLLAR SIGN ***
+```{r}
+# Exploring death rates based on other parameters
+FullStats %>%
+  ggplot(aes(x = as.factor(gdpcap), y = deathrate, na.rm = TRUE)) +
+  geom_point(aes(color = WHO.Region)) 
+```
+
+
+
+
+
+
