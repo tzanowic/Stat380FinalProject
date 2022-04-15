@@ -46,7 +46,7 @@ FullStats <-
 # EDA
 
 ```{r}
-# Exploring COVID RATES
+# Exploring COVID RATES by Region
 FullStats %>%
   group_by(WHO.Region) %>%
   summarise(countries = n(), avgcovidcases = mean(totalcases), avgcoviddeaths = mean(totaldeaths), deathrate = (avgcoviddeaths/avgcovidcases))
