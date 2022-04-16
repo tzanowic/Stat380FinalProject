@@ -23,13 +23,16 @@ CumulativeCovid <- read.csv("WHO-COVID-19-global-table-data (2).csv")
 VaccineData <- read.csv("vaccination-data.csv")
 GDPpCapita <- read.csv("API_NY.GDP.PCAP.CD_DS2_en_csv_v2_3930492.csv")
 UrbanPop <- read.csv("API_SP.URB.TOTL.IN.ZS_DS2_en_csv_v2_3930188.csv")
+HealthExpCap <- read.csv("API_SH.XPD.CHEX.PC.CD_DS2_en_csv_v2_3930363.csv")
 ```
 
 ```{r}
-# Merging GDP and UrbanPop data 
+# Merging Data Variables
 CountryNumbers <-
   inner_join(GDPpCapita, UrbanPop, by = "Country.Name") %>%
-  dplyr::rename(urbpop = X2020, gdpcap = X2020_GDP_per_Capita, Name = Country.Name)
+  dplyr::rename(urbpop = X2020, gdpcap = X2020_GDP_per_Capita)
+CountryNumbers <-
+  inner_join(CountryNumbers, HealthExpCap, by = "Country.Name")
 ```
 
 
@@ -40,6 +43,7 @@ FullStats <-
   mutate(deathrate = Deaths...cumulative.total/Cases...cumulative.total) %>%
   dplyr::rename(totalcases = Cases...cumulative.total, totaldeaths = Deaths...cumulative.total) %>%
   mutate_all(na_if, "")
+FullStats$gdpcap = as.numeric(gsub("[\\$,]", "", FullStats$gdpcap))
 ```
 
 
@@ -52,11 +56,11 @@ FullStats %>%
   summarise(countries = n(), avgcovidcases = mean(totalcases), avgcoviddeaths = mean(totaldeaths), deathrate = (avgcoviddeaths/avgcovidcases))
 ```
 
-*** CONVERT GDP TO NUMBER WITHOUT DOLLAR SIGN ***
+
 ```{r}
 # Exploring death rates based on other parameters
 FullStats %>%
-  ggplot(aes(x = as.factor(gdpcap), y = deathrate, na.rm = TRUE)) +
+  ggplot(aes(x = (gdpcap), y = deathrate, na.rm = TRUE)) +
   geom_point(aes(color = WHO.Region)) 
 FullStats %>%
   ggplot(aes(x = (urbpop), y = deathrate, na.rm = TRUE)) +
@@ -66,7 +70,7 @@ FullStats %>%
 ### Identifying Outliers
 
 ```{r}
-# YEMEN
+# YEMEN, MONACO
 ```
 
 
