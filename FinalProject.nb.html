@@ -221,50 +221,62 @@ pre code {
 <h1>Front Matter</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KExhaG1hbilcbmxpYnJhcnkocmVzaGFwZTIpXG5saWJyYXJ5KG1kc3IpXG5saWJyYXJ5KG12dG5vcm0pXG5saWJyYXJ5KGZhY3RvZXh0cmEpXG5saWJyYXJ5KGNsdXN0ZXIpXG5gYGBcbmBgYCJ9 -->
-<pre class="r"><code>```r
-library(tidyverse)
-library(Lahman)
-library(reshape2)
-library(mdsr)
-library(mvtnorm)
-library(factoextra)
-library(cluster)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyverse)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxu4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDEuMy4xIOKUgOKUgFxu4pyTIGdncGxvdDIgMy4zLjUgICAgIOKckyBwdXJyciAgIDAuMy40XG7inJMgdGliYmxlICAzLjEuNiAgICAg4pyTIGRwbHlyICAgMS4wLjdcbuKckyB0aWR5ciAgIDEuMS40ICAgICDinJMgc3RyaW5nciAxLjQuMFxu4pyTIHJlYWRyICAgMi4xLjEgICAgIOKckyBmb3JjYXRzIDAuNS4xXG7ilIDilIAgQ29uZmxpY3RzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG54IGRwbHlyOjpmaWx0ZXIoKSBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbnggZHBseXI6OmxhZygpICAgIG1hc2tzIHN0YXRzOjpsYWcoKVxuIn0= -->
+<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+── Attaching packages ─────────────────────────────────────────────────── tidyverse 1.3.1 ──
+✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+✓ tibble  3.1.6     ✓ dplyr   1.0.7
+✓ tidyr   1.1.4     ✓ stringr 1.4.0
+✓ readr   2.1.1     ✓ forcats 0.5.1
+── Conflicts ────────────────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShMYWhtYW4pXG5saWJyYXJ5KHJlc2hhcGUyKVxuYGBgIn0= -->
+<pre class="r"><code>library(Lahman)
+library(reshape2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYcmVzaGFwZTLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTp0aWR5cuKAmTpcblxuICAgIHNtaXRoc1xuIn0= -->
 <pre><code>
-&lt;!-- rnb-source-end --&gt;
+Attaching package: ‘reshape2’
 
-&lt;!-- rnb-chunk-end --&gt;
+The following object is masked from ‘package:tidyr’:
 
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-# Loading the Data
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ292aWREYWlseSA8LSByZWFkLmNzdihcIldITy1DT1ZJRC0xOS1nbG9iYWwtZGF0YS5jc3ZcIilcbkN1bXVsYXRpdmVDb3ZpZCA8LSByZWFkLmNzdihcIldITy1DT1ZJRC0xOS1nbG9iYWwtdGFibGUtZGF0YSAoMikuY3N2XCIpXG5WYWNjaW5lRGF0YSA8LSByZWFkLmNzdihcInZhY2NpbmF0aW9uLWRhdGEuY3N2XCIpXG5HRFBwQ2FwaXRhIDwtIHJlYWQuY3N2KFwiQVBJX05ZLkdEUC5QQ0FQLkNEX0RTMl9lbl9jc3ZfdjJfMzkzMDQ5Mi5jc3ZcIilcblVyYmFuUG9wIDwtIHJlYWQuY3N2KFwiQVBJX1NQLlVSQi5UT1RMLklOLlpTX0RTMl9lbl9jc3ZfdjJfMzkzMDE4OC5jc3ZcIilcbkhlYWx0aEV4cENhcCA8LSByZWFkLmNzdihcIkFQSV9TSC5YUEQuQ0hFWC5QQy5DRF9EUzJfZW5fY3N2X3YyXzM5MzAzNjMuY3N2XCIpXG5IZWFsdGhFeHBDYXAgPC1cbiAgSGVhbHRoRXhwQ2FwICU+JVxuICBkcGx5cjo6cmVuYW1lKENvdW50cnkuTmFtZSA9IFwiQ291bnRyeSBOYW1lXCIpXG5gYGAifQ== --&gt;
-
-```r
-CovidDaily &lt;- read.csv(&quot;WHO-COVID-19-global-data.csv&quot;)
+    smiths</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShtZHNyKVxubGlicmFyeShtdnRub3JtKVxubGlicmFyeShmYWN0b2V4dHJhKVxuYGBgIn0= -->
+<pre class="r"><code>library(mdsr)
+library(mvtnorm)
+library(factoextra)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2VsY29tZSEgV2FudCB0byBsZWFybiBtb3JlPyBTZWUgdHdvIGZhY3RvZXh0cmEtcmVsYXRlZCBib29rcyBhdCBodHRwczovL2dvby5nbC92ZTNXQmFcbiJ9 -->
+<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShjbHVzdGVyKVxuXG5gYGAifQ== -->
+<pre class="r"><code>library(cluster)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="loading-the-data" class="section level1">
+<h1>Loading the Data</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ292aWREYWlseSA8LSByZWFkLmNzdihcIldITy1DT1ZJRC0xOS1nbG9iYWwtZGF0YS5jc3ZcIilcbkN1bXVsYXRpdmVDb3ZpZCA8LSByZWFkLmNzdihcIldITy1DT1ZJRC0xOS1nbG9iYWwtdGFibGUtZGF0YSAoMikuY3N2XCIpXG5WYWNjaW5lRGF0YSA8LSByZWFkLmNzdihcInZhY2NpbmF0aW9uLWRhdGEuY3N2XCIpXG5HRFBwQ2FwaXRhIDwtIHJlYWQuY3N2KFwiQVBJX05ZLkdEUC5QQ0FQLkNEX0RTMl9lbl9jc3ZfdjJfMzkzMDQ5Mi5jc3ZcIilcblVyYmFuUG9wIDwtIHJlYWQuY3N2KFwiQVBJX1NQLlVSQi5UT1RMLklOLlpTX0RTMl9lbl9jc3ZfdjJfMzkzMDE4OC5jc3ZcIilcbkhlYWx0aEV4cENhcCA8LSByZWFkLmNzdihcIkFQSV9TSC5YUEQuQ0hFWC5QQy5DRF9EUzJfZW5fY3N2X3YyXzM5MzAzNjMuY3N2XCIpXG5gYGAifQ== -->
+<pre class="r"><code>CovidDaily &lt;- read.csv(&quot;WHO-COVID-19-global-data.csv&quot;)
 CumulativeCovid &lt;- read.csv(&quot;WHO-COVID-19-global-table-data (2).csv&quot;)
 VaccineData &lt;- read.csv(&quot;vaccination-data.csv&quot;)
 GDPpCapita &lt;- read.csv(&quot;API_NY.GDP.PCAP.CD_DS2_en_csv_v2_3930492.csv&quot;)
 UrbanPop &lt;- read.csv(&quot;API_SP.URB.TOTL.IN.ZS_DS2_en_csv_v2_3930188.csv&quot;)
-HealthExpCap &lt;- read.csv(&quot;API_SH.XPD.CHEX.PC.CD_DS2_en_csv_v2_3930363.csv&quot;)
-HealthExpCap &lt;-
-  HealthExpCap %&gt;%
-  dplyr::rename(Country.Name = &quot;Country Name&quot;)</code></pre>
+HealthExpCap &lt;- read.csv(&quot;API_SH.XPD.CHEX.PC.CD_DS2_en_csv_v2_3930363.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IENhbid0IHJlbmFtZSBjb2x1bW5zIHRoYXQgZG9uJ3QgZXhpc3QuXG54IENvbHVtbiBgQ291bnRyeSBOYW1lYCBkb2Vzbid0IGV4aXN0LlxuUnVuIGBybGFuZzo6bGFzdF9lcnJvcigpYCB0byBzZWUgd2hlcmUgdGhlIGVycm9yIG9jY3VycmVkLlxuIn0= -->
-<pre><code>Error: Can&#39;t rename columns that don&#39;t exist.
-x Column `Country Name` doesn&#39;t exist.
-Run `rlang::last_error()` to see where the error occurred.</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -281,15 +293,19 @@ CountryNumbers &lt;-
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNZXJnaW5nIE51bWJlcnMgYW5kIENvdmlkIFJhdGVzIFxuRnVsbFN0YXRzIDwtXG4gIGlubmVyX2pvaW4oQ291bnRyeU51bWJlcnMsIEN1bXVsYXRpdmVDb3ZpZCwgYnkgPSBcIk5hbWVcIikgJT4lXG4gIG11dGF0ZShkZWF0aHJhdGUgPSBEZWF0aHMuLi5jdW11bGF0aXZlLnRvdGFsL0Nhc2VzLi4uY3VtdWxhdGl2ZS50b3RhbCkgJT4lXG4gIGRwbHlyOjpyZW5hbWUodG90YWxjYXNlcyA9IENhc2VzLi4uY3VtdWxhdGl2ZS50b3RhbCwgdG90YWxkZWF0aHMgPSBEZWF0aHMuLi5jdW11bGF0aXZlLnRvdGFsKSAlPiVcbiAgbXV0YXRlX2FsbChuYV9pZiwgXCJcIilcbiNGdWxsU3RhdHMkZ2RwY2FwID0gYXMubnVtZXJpYyhnc3ViKFwiXFxcXCRcIiwgXCJcIiwgRnVsbFN0YXRzJGdkcGNhcCkpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNZXJnaW5nIE51bWJlcnMgYW5kIENvdmlkIFJhdGVzIFxuRnVsbFN0YXRzIDwtXG4gIGlubmVyX2pvaW4oQ291bnRyeU51bWJlcnMsIEN1bXVsYXRpdmVDb3ZpZCwgYnkgPSBcIk5hbWVcIikgJT4lXG4gIG11dGF0ZShkZWF0aHJhdGUgPSBEZWF0aHMuLi5jdW11bGF0aXZlLnRvdGFsL0Nhc2VzLi4uY3VtdWxhdGl2ZS50b3RhbCkgJT4lXG4gIGRwbHlyOjpyZW5hbWUodG90YWxjYXNlcyA9IENhc2VzLi4uY3VtdWxhdGl2ZS50b3RhbCwgdG90YWxkZWF0aHMgPSBEZWF0aHMuLi5jdW11bGF0aXZlLnRvdGFsKSAlPiVcbiAgbXV0YXRlX2FsbChuYV9pZiwgXCJcIilcbmBgYCJ9 -->
 <pre class="r"><code># Merging Numbers and Covid Rates 
 FullStats &lt;-
   inner_join(CountryNumbers, CumulativeCovid, by = &quot;Name&quot;) %&gt;%
   mutate(deathrate = Deaths...cumulative.total/Cases...cumulative.total) %&gt;%
   dplyr::rename(totalcases = Cases...cumulative.total, totaldeaths = Deaths...cumulative.total) %&gt;%
-  mutate_all(na_if, &quot;&quot;)
-#FullStats$gdpcap = as.numeric(gsub(&quot;\\$&quot;, &quot;&quot;, FullStats$gdpcap))</code></pre>
+  mutate_all(na_if, &quot;&quot;)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IEpvaW4gY29sdW1ucyBtdXN0IGJlIHByZXNlbnQgaW4gZGF0YS5cbnggUHJvYmxlbSB3aXRoIGBOYW1lYC5cblJ1biBgcmxhbmc6Omxhc3RfZXJyb3IoKWAgdG8gc2VlIHdoZXJlIHRoZSBlcnJvciBvY2N1cnJlZC5cbiJ9 -->
+<pre><code>Error: Join columns must be present in data.
+x Problem with `Name`.
+Run `rlang::last_error()` to see where the error occurred.</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
