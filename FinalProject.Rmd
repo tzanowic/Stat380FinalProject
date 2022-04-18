@@ -24,6 +24,8 @@ VaccineData <- read.csv("vaccination-data.csv")
 GDPpCapita <- read.csv("API_NY.GDP.PCAP.CD_DS2_en_csv_v2_3930492.csv")
 UrbanPop <- read.csv("API_SP.URB.TOTL.IN.ZS_DS2_en_csv_v2_3930188.csv")
 HealthExpCap <- read.csv("API_SH.XPD.CHEX.PC.CD_DS2_en_csv_v2_3930363.csv")
+AirTravel <- read.csv("API_IS.AIR.DPRT_DS2_en_csv_v2_3931315.csv")
+AgeDependancy <- read.csv("API_SP.POP.DPND_DS2_en_csv_v2_3932148.csv")
 ```
 
 ```{r}
@@ -33,6 +35,10 @@ CountryNumbers <-
   dplyr::rename(urbpop = X2020, gdpcap = X2020_GDP_per_Capita)
 CountryNumbers <-
   inner_join(CountryNumbers, HealthExpCap, by = "Country.Name")
+CountryNumbers <-
+  inner_join(CountryNumbers, AirTravel, by = "Country.Name")
+CountryNumbers <-
+  inner_join(CountryNumbers, AgeDependancy, by = "Country.Name")
 ```
 
 
