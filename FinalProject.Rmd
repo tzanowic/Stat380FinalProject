@@ -27,6 +27,7 @@ HealthExpCap <- read.csv("API_SH.XPD.CHEX.PC.CD_DS2_en_csv_v2_3930363.csv")
 AirTravel <- read.csv("API_IS.AIR.DPRT_DS2_en_csv_v2_3931315.csv")
 AgeDependancy <- read.csv("API_SP.POP.DPND_DS2_en_csv_v2_3932148.csv")
 MilitaryExp <- read.csv("API_MS.MIL.XPND.GD.ZS_DS2_en_csv_v2_3917458.csv")
+HospitalBeds <- read.csv("API_SH.MED.BEDS.ZS_DS2_en_csv_v2_3931798.csv")
 ```
 
 ```{r}
@@ -41,7 +42,9 @@ CountryNumbers <-
 CountryNumbers <-
   inner_join(CountryNumbers, AgeDependancy, by = "Country.Code")
 CountryNumbers <-
-  inner_join(CountryNumbers, MilitaryExp, by = "Country.Code")
+  inner_join(CountryNumbers, MilitaryExp, by = "Country.Code") 
+CountryNumbers <-
+  inner_join(CountryNumbers, HospitalBeds, by = "Country.Code") 
 ```
 
 
