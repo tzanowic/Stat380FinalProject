@@ -26,6 +26,7 @@ UrbanPop <- read.csv("API_SP.URB.TOTL.IN.ZS_DS2_en_csv_v2_3930188.csv")
 HealthExpCap <- read.csv("API_SH.XPD.CHEX.PC.CD_DS2_en_csv_v2_3930363.csv")
 AirTravel <- read.csv("API_IS.AIR.DPRT_DS2_en_csv_v2_3931315.csv")
 AgeDependancy <- read.csv("API_SP.POP.DPND_DS2_en_csv_v2_3932148.csv")
+MilitaryExp <- read.csv("API_MS.MIL.XPND.GD.ZS_DS2_en_csv_v2_3917458.csv")
 ```
 
 ```{r}
@@ -39,6 +40,8 @@ CountryNumbers <-
   inner_join(CountryNumbers, AirTravel, by = "Country.Name")
 CountryNumbers <-
   inner_join(CountryNumbers, AgeDependancy, by = "Country.Name")
+CountryNumbers <-
+  inner_join(CountryNumbers, MilitaryExp, by = "Country.Name")
 ```
 
 
@@ -78,7 +81,6 @@ FullStats %>%
 ```{r}
 # YEMEN, MONACO
 ```
-
 
 
 
