@@ -5,6 +5,13 @@ output: html_notebook
 ---
 
 # Front Matter
+
+## Clear Environment
+```{r}
+# rm(list = ls())
+```
+
+## Library Calls
 ```{r}
 library(tidyverse)
 library(Lahman)
@@ -13,10 +20,9 @@ library(mdsr)
 library(mvtnorm)
 library(factoextra)
 library(cluster)
-
 ```
 
-# Loading the Data
+## Loading Data
 ```{r}
 CovidDaily <- read.csv("WHO-COVID-19-global-data.csv")
 CumulativeCovid <- read.csv("WHO-COVID-19-global-table-data (2).csv")
@@ -30,8 +36,10 @@ MilitaryExp <- read.csv("API_MS.MIL.XPND.GD.ZS_DS2_en_csv_v2_3917458.csv")
 HospitalBeds <- read.csv("API_SH.MED.BEDS.ZS_DS2_en_csv_v2_3931798.csv")
 ```
 
+# Data Cleaning
+
+## Merging Datasets
 ```{r}
-# Merging Data Variables
 CountryNumbers <-
   inner_join(GDPpCapita, UrbanPop, by = "Country.Code") %>%
   dplyr::rename(urbpop = X2020, gdpcap = X2020_GDP_per_Capita)
@@ -44,15 +52,17 @@ CountryNumbers <-
 CountryNumbers <-
   inner_join(CountryNumbers, MilitaryExp, by = "Country.Code") 
 CountryNumbers <-
-  inner_join(CountryNumbers, HospitalBeds, by = "Country.Code") 
+  inner_join(CountryNumbers, HospitalBeds, by = "Country.Code")
+```
 
+## Renaming Columns for Compatibility
+```{r}
 colnames(CountryNumbers)[1] <- "Name"
 colnames(CumulativeCovid)[1] <- "Name"
 ```
 
-
+## Merging Numbers and Covid Rates 
 ```{r}
-# Merging Numbers and Covid Rates 
 FullStats <-
   inner_join(CountryNumbers, CumulativeCovid, by = "Name") %>%
   mutate(deathrate = Deaths...cumulative.total/Cases...cumulative.total) %>%
@@ -61,19 +71,17 @@ FullStats <-
 FullStats$gdpcap = as.numeric(gsub("[\\$,]", "", FullStats$gdpcap))
 ```
 
+# Exploratory Data Analysis
 
-# EDA
-
+## COVID-19 Rates by Geographical Region
 ```{r}
-# Exploring COVID RATES by Region
 FullStats %>%
   group_by(WHO.Region) %>%
   summarise(countries = n(), avgcovidcases = mean(totalcases), avgcoviddeaths = mean(totaldeaths), deathrate = (avgcoviddeaths/avgcovidcases))
 ```
 
-
+## Exploring Death Rates vs Other Parameters
 ```{r}
-# Exploring death rates based on other parameters
 FullStats %>%
   ggplot(aes(x = (gdpcap), y = deathrate, na.rm = TRUE)) +
   geom_point(aes(color = WHO.Region)) 
@@ -82,7 +90,7 @@ FullStats %>%
   geom_point(aes(color = WHO.Region)) 
 ```
 
-### Identifying Outliers
+## Identifying Outliers
 
 ```{r}
 # YEMEN, MONACO
