@@ -32,16 +32,16 @@ MilitaryExp <- read.csv("API_MS.MIL.XPND.GD.ZS_DS2_en_csv_v2_3917458.csv")
 ```{r}
 # Merging Data Variables
 CountryNumbers <-
-  inner_join(GDPpCapita, UrbanPop, by = "Country.Name") %>%
+  inner_join(GDPpCapita, UrbanPop, by = "Country.Code") %>%
   dplyr::rename(urbpop = X2020, gdpcap = X2020_GDP_per_Capita)
 CountryNumbers <-
-  inner_join(CountryNumbers, HealthExpCap, by = "Country.Name")
+  inner_join(CountryNumbers, HealthExpCap, by = "Country.Code")
 CountryNumbers <-
-  inner_join(CountryNumbers, AirTravel, by = "Country.Name")
+  inner_join(CountryNumbers, AirTravel, by = "Country.Code")
 CountryNumbers <-
-  inner_join(CountryNumbers, AgeDependancy, by = "Country.Name")
+  inner_join(CountryNumbers, AgeDependancy, by = "Country.Code")
 CountryNumbers <-
-  inner_join(CountryNumbers, MilitaryExp, by = "Country.Name")
+  inner_join(CountryNumbers, MilitaryExp, by = "Country.Code")
 ```
 
 
