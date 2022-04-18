@@ -45,6 +45,9 @@ CountryNumbers <-
   inner_join(CountryNumbers, MilitaryExp, by = "Country.Code") 
 CountryNumbers <-
   inner_join(CountryNumbers, HospitalBeds, by = "Country.Code") 
+
+colnames(CountryNumbers)[1] <- "Name"
+colnames(CumulativeCovid)[1] <- "Name"
 ```
 
 
