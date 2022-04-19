@@ -20,11 +20,18 @@ library(mdsr)
 library(mvtnorm)
 library(factoextra)
 library(cluster)
+library(leaps)
+library(caret)
+library(ISLR2)
 ```
 
 ## Loading Data
 ```{r}
 FullStats <- read.csv("FullStats.csv")
+FullStatsNA <-
+  FullStats %>%
+  rename(deathsper100000 = Deaths...cumulative.total.per.100000.population, casesper100000 = Cases...cumulative.total.per.100000.population) %>%
+  na.omit()
 head(FullStats)
 VaccineData <- read.csv("vaccination-data.csv")
 ```
@@ -56,6 +63,17 @@ FullStats %>%
 # YEMEN, MONACO
 ```
 
+## Multiple Linear Regression - Deaths per 100000
 
+```{r}
+# All Variables
+deathrate.fit <- lm(data = FullStatsNA, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + PovertyRate, na.rm = TRUE)
+summary(deathrate.fit)
+```
 
-
+# Multiple Linear Regression - Cases Per 100000
+```{r}
+# Case Rate - All Vars
+caserate.fit <- lm(data = FullStatsNA, casesper100000 ~  gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + PovertyRate, na.rm = TRUE)
+summary(caserate.fit)
+```
