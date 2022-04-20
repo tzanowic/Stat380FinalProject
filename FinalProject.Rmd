@@ -28,12 +28,14 @@ library(ISLR2)
 ## Loading Data
 ```{r}
 FullStats <- read.csv("FullStats.csv")
-FullStatsNA <-
+FullStats <-
   FullStats %>%
-  rename(deathsper100000 = Deaths...cumulative.total.per.100000.population, casesper100000 = Cases...cumulative.total.per.100000.population) %>%
-  na.omit()
+  rename(deathsper100000 = Deaths...cumulative.total.per.100000.population, casesper100000 = Cases...cumulative.total.per.100000.population)
 head(FullStats)
 VaccineData <- read.csv("vaccination-data.csv")
+FullStats$gdpcap <- FullStats$gdpcap/1000
+FullStats$AirTransport <- FullStats$AirTransport/1000
+FullStats$HealthExppCap <- FullStats$HealthExppCap/100
 ```
 
 
@@ -67,8 +69,20 @@ FullStats %>%
 
 ```{r}
 # All Variables
-deathrate.fit <- lm(data = FullStatsNA, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + PovertyRate, na.rm = TRUE)
+deathrate.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + PovertyRate, na.rm = TRUE)
 summary(deathrate.fit)
+
+# No Poverty Rate
+deathrate2.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds, na.rm = TRUE)
+summary(deathrate2.fit)
+
+# No Air Transport
+deathrate3.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AgeDependancy + MilitaryEx + HospitalBeds, na.rm = TRUE)
+summary(deathrate3.fit)
+
+# No 
+deathrate4.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap +urbpop + HealthExppCap + AgeDependancy + HospitalBeds, na.rm = TRUE)
+summary(deathrate4.fit)
 ```
 
 # Multiple Linear Regression - Cases Per 100000
@@ -76,4 +90,7 @@ summary(deathrate.fit)
 # Case Rate - All Vars
 caserate.fit <- lm(data = FullStatsNA, casesper100000 ~  gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + PovertyRate, na.rm = TRUE)
 summary(caserate.fit)
+
+
+
 ```
