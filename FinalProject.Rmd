@@ -80,10 +80,19 @@ summary(deathrate2.fit)
 deathrate3.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AgeDependancy + MilitaryEx + HospitalBeds, na.rm = TRUE)
 summary(deathrate3.fit)
 
-# No 
+# No MilitaryEx
 deathrate4.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap +urbpop + HealthExppCap + AgeDependancy + HospitalBeds, na.rm = TRUE)
 summary(deathrate4.fit)
+
+# No HealthExp
+deathrate5.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + AgeDependancy + HospitalBeds, na.rm = TRUE)
+summary(deathrate5.fit)
 ```
+
+```{r}
+
+```
+
 
 # Multiple Linear Regression - Cases Per 100000
 ```{r}
