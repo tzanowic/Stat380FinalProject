@@ -105,17 +105,53 @@ ggplot(data = temp, aes(x = factor(WHO.Region), y = deathrate,
 deathrate.fit <- lm(data = FullStats, deathsper100000 ~ urbpop + AgeDependancy + HospitalBeds  + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 0 , na.rm = TRUE)
 summary(deathrate.fit)
 AIC(deathrate.fit)
+
+
 ```
 
 ```{r}
 # 34
-deathrate.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop  + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds   + urbpop:AgeDependancy + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + AirTransport:gdpcap + 0 , na.rm = TRUE)
+deathrate.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop  + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + PovertyRate + HealthExppCap  + urbpop:AgeDependancy + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + AirTransport:gdpcap + 0 , na.rm = TRUE)
 summary(deathrate.fit)
 AIC(deathrate.fit)
+
+
+library(leaps)
+regfit.full = regsubsets(deathsper100000 ~ gdpcap + urbpop  + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + PovertyRate + HealthExppCap  + urbpop:AgeDependancy + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + PovertyRate:urbpop + gdpcap:HospitalBeds + AgeDependancy:gdpcap + AgeDependancy:PovertyRate + AirTransport:gdpcap + 0 , data = FullStats,  nvmax = 16, method="exhaustive")
+summary(regfit.full)
+
+reg.summary <- summary(regfit.full) #get the summary
+
+
+par(mfrow=c(2,2))
+#rss plot - useful
+plot(reg.summary$rss ,xlab="Number of Variables ",ylab="RSS",type="l")
+
+#adjr2 plot
+plot(reg.summary$adjr2 ,xlab="Number of Variables ", ylab="Adjusted RSq",type="l")
+max_adjr2 <- which.max(reg.summary$adjr2)
+points(max_adjr2,reg.summary$adjr2[max_adjr2], col="red",cex=2,pch=20)
+
+# AIC criterion (Cp)
+plot(reg.summary$cp ,xlab="Number of Variables ",ylab="Cp", type='l')
+min_cp <- which.min(reg.summary$cp )
+points(min_cp, reg.summary$cp[min_cp],col="red",cex=2,pch=20)
+
+# BIC criterion
+plot(reg.summary$bic ,xlab="Number of Variables ",ylab="BIC",type='l')
+min_bic <- which.min(reg.summary$bic)
+points(min_bic,reg.summary$bic[min_bic],col="red",cex=2,pch=20)
+```
+```{r}
+# 6 is best number of variables
+deathrate6.fit <- lm(data = FullStats, deathsper100000 ~ urbpop + HospitalBeds + gdpcap:PovertyRate + urbpop:HospitalBeds + urbpop:PovertyRate + gdpcap:AgeDependancy + 0, na.rm = TRUE)
+summary(deathrate6.fit)
+AIC(deathrate6.fit)
 ```
 
+
 ```{r}
-AllModels <- ols_step_all_possible(deathrate.fit)
+#AllModels <- ols_step_all_possible(deathrate.fit)
 ```
 
 
