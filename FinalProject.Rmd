@@ -23,6 +23,7 @@ library(cluster)
 library(leaps)
 library(caret)
 library(ISLR2)
+library(olsrr)
 ```
 
 ## Loading Data
@@ -69,28 +70,20 @@ FullStats %>%
 
 ```{r}
 # All Variables
-deathrate.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + PovertyRate, na.rm = TRUE)
+deathrate.fit <- lm(data = FullStats, deathsper100000 ~ urbpop + AgeDependancy + HospitalBeds  + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 0 , na.rm = TRUE)
 summary(deathrate.fit)
-
-# No Poverty Rate
-deathrate2.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds, na.rm = TRUE)
-summary(deathrate2.fit)
-
-# No Air Transport
-deathrate3.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AgeDependancy + MilitaryEx + HospitalBeds, na.rm = TRUE)
-summary(deathrate3.fit)
-
-# No MilitaryEx
-deathrate4.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap +urbpop + HealthExppCap + AgeDependancy + HospitalBeds, na.rm = TRUE)
-summary(deathrate4.fit)
-
-# No HealthExp
-deathrate5.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + AgeDependancy + HospitalBeds, na.rm = TRUE)
-summary(deathrate5.fit)
+AIC(deathrate.fit)
 ```
 
 ```{r}
+# 34
+deathrate.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop  + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds  + gdpcap:HealthExppCap + gdpcap:urbpop + urbpop:AgeDependancy + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + AirTransport:gdpcap + 0 , na.rm = TRUE)
+summary(deathrate.fit)
+AIC(deathrate.fit)
+```
 
+```{r}
+AllModels <- ols_step_all_possible(deathrate.fit)
 ```
 
 

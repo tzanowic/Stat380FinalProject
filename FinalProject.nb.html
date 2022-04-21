@@ -233,32 +233,18 @@ pre code {
 <h2>Library Calls</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KExhaG1hbilcbmxpYnJhcnkocmVzaGFwZTIpXG5saWJyYXJ5KG1kc3IpXG5saWJyYXJ5KG12dG5vcm0pXG5saWJyYXJ5KGZhY3RvZXh0cmEpXG5saWJyYXJ5KGNsdXN0ZXIpXG5saWJyYXJ5KGxlYXBzKVxubGlicmFyeShjYXJldClcbmBgYCJ9 -->
-<pre class="r"><code>library(tidyverse)
-library(Lahman)
-library(reshape2)
-library(mdsr)
-library(mvtnorm)
-library(factoextra)
-library(cluster)
-library(leaps)
-library(caret)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShvbHNycilcblxuYGBgIn0= -->
+<pre class="r"><code>library(olsrr)
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBsYXR0aWNlXG5SZWdpc3RlcmVkIFMzIG1ldGhvZCBvdmVyd3JpdHRlbiBieSAnZGF0YS50YWJsZSc6XG4gIG1ldGhvZCAgICAgICAgICAgZnJvbVxuICBwcmludC5kYXRhLnRhYmxlICAgICBcblxuQXR0YWNoaW5nIHBhY2thZ2U6IOKAmGNhcmV04oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6cHVycnLigJk6XG5cbiAgICBsaWZ0XG4ifQ== -->
-<pre><code>Loading required package: lattice
-Registered S3 method overwritten by &#39;data.table&#39;:
-  method           from
-  print.data.table     
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYb2xzcnLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTpkYXRhc2V0c+KAmTpcblxuICAgIHJpdmVyc1xuIn0= -->
+<pre><code>
+Attaching package: ‘olsrr’
 
-Attaching package: ‘caret’
+The following object is masked from ‘package:datasets’:
 
-The following object is masked from ‘package:purrr’:
-
-    lift</code></pre>
+    rivers</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShJU0xSMilcbmBgYCJ9 -->
-<pre class="r"><code>library(ISLR2)</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -333,9 +319,9 @@ FullStats %&gt;%
 <h2>Multiple Linear Regression - Deaths per 100000</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBbGwgVmFyaWFibGVzXG5kZWF0aHJhdGUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBBaXJUcmFuc3BvcnQgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlLCBuYS5ybSA9IFRSVUUpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBbGwgVmFyaWFibGVzXG5kZWF0aHJhdGUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMgICsgZ2RwY2FwOlBvdmVydHlSYXRlICsgdXJicG9wOkhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlOkhvc3BpdGFsQmVkcyArIDAgLCBuYS5ybSA9IFRSVUUpXG5gYGAifQ== -->
 <pre class="r"><code># All Variables
-deathrate.fit &lt;- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + PovertyRate, na.rm = TRUE)</code></pre>
+deathrate.fit &lt;- lm(data = FullStats, deathsper100000 ~ urbpop + AgeDependancy + HospitalBeds  + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 0 , na.rm = TRUE)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogSW4gbG0uZml0KHgsIHksIG9mZnNldCA9IG9mZnNldCwgc2luZ3VsYXIub2sgPSBzaW5ndWxhci5vaywgLi4uKSA6XG4gZXh0cmEgYXJndW1lbnQg4oCYbmEucm3igJkgd2lsbCBiZSBkaXNyZWdhcmRlZFxuIn0= -->
 <pre><code>Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
@@ -344,192 +330,103 @@ deathrate.fit &lt;- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + Hea
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZWF0aHJhdGUuZml0KVxuYGBgIn0= -->
 <pre class="r"><code>summary(deathrate.fit)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBcbiAgICBBaXJUcmFuc3BvcnQgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcyArIFxuICAgIFBvdmVydHlSYXRlLCBkYXRhID0gRnVsbFN0YXRzLCBuYS5ybSA9IFRSVUUpXG5cblJlc2lkdWFsczpcbiAgICBNaW4gICAgICAxUSAgTWVkaWFuICAgICAgM1EgICAgIE1heCBcbi0yNDEuMzcgIC03Ni4xMyAgLTEyLjQwICAgNTAuNDcgIDQ1OC4xOSBcblxuQ29lZmZpY2llbnRzOlxuICAgICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgdCB2YWx1ZSBQcig+fHR8KSAgXG4oSW50ZXJjZXB0KSAgIDIwOS42NjA1ODUgMTAwLjk3NTc2NiAgIDIuMDc2ICAgMC4wNDA3ICpcbmdkcGNhcCAgICAgICAgIC0xLjMyMDUwOSAgIDEuNjY5Nzk3ICAtMC43OTEgICAwLjQzMTEgIFxudXJicG9wICAgICAgICAgIDEuNDU4OTIxICAgMC44MzgyMTggICAxLjc0MSAgIDAuMDg1MiAuXG5IZWFsdGhFeHBwQ2FwICAgMC41NjkxNDEgICAxLjc0NTg3MyAgIDAuMzI2ICAgMC43NDUyICBcbkFpclRyYW5zcG9ydCAgIC0wLjAwNTQ4NiAgIDAuMDIwNjU4ICAtMC4yNjYgICAwLjc5MTIgIFxuQWdlRGVwZW5kYW5jeSAgLTIuODg4MzA2ICAgMS4zODkxNTggIC0yLjA3OSAgIDAuMDQwNCAqXG5NaWxpdGFyeUV4ICAgICAtMy4xNzQ5NzQgICA5LjU3NTQyNCAgLTAuMzMyICAgMC43NDEwICBcbkhvc3BpdGFsQmVkcyAgIDExLjkwMzQ0OSAgIDUuNDI4MDU2ICAgMi4xOTMgICAwLjAzMDkgKlxuUG92ZXJ0eVJhdGUgICAgLTAuMzY5NzY5ICAgMS4xNzQ3OTggIC0wLjMxNSAgIDAuNzUzNyAgXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDExOS4xIG9uIDkwIGRlZ3JlZXMgb2YgZnJlZWRvbVxuICAoOTIgb2JzZXJ2YXRpb25zIGRlbGV0ZWQgZHVlIHRvIG1pc3NpbmduZXNzKVxuTXVsdGlwbGUgUi1zcXVhcmVkOiAgMC4yNjksXHRBZGp1c3RlZCBSLXNxdWFyZWQ6ICAwLjIwNCBcbkYtc3RhdGlzdGljOiAgNC4xNCBvbiA4IGFuZCA5MCBERiwgIHAtdmFsdWU6IDAuMDAwMzAzM1xuIn0= -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRlYXRoc3BlcjEwMDAwMCB+IHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMgKyBcbiAgICBnZHBjYXA6UG92ZXJ0eVJhdGUgKyB1cmJwb3A6SG9zcGl0YWxCZWRzICsgUG92ZXJ0eVJhdGU6SG9zcGl0YWxCZWRzICsgXG4gICAgMCwgZGF0YSA9IEZ1bGxTdGF0cywgbmEucm0gPSBUUlVFKVxuXG5SZXNpZHVhbHM6XG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMTg5LjE0ICAtNjMuODggIC0xMi4yOCAgIDQ0Ljg4ICA0ODUuNTYgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fCkgICAgXG51cmJwb3AgICAgICAgICAgICAgICAgICAgICAyLjU4NzUgICAgIDAuNDQ4MSAgIDUuNzc0IDUuNjllLTA4ICoqKlxuQWdlRGVwZW5kYW5jeSAgICAgICAgICAgICAtMS41ODExICAgICAwLjQxMDIgIC0zLjg1NCAwLjAwMDE4NCAqKipcbkhvc3BpdGFsQmVkcyAgICAgICAgICAgICAgNjEuMjY5NyAgICAxMy4zOTk0ICAgNC41NzMgMS4xNGUtMDUgKioqXG5nZHBjYXA6UG92ZXJ0eVJhdGUgICAgICAgICAxLjM2NzIgICAgIDAuNTA2NyAgIDIuNjk4IDAuMDA3OTI3ICoqIFxudXJicG9wOkhvc3BpdGFsQmVkcyAgICAgICAtMC42MzgzICAgICAwLjE4NzcgIC0zLjQwMSAwLjAwMDkwMCAqKipcbkhvc3BpdGFsQmVkczpQb3ZlcnR5UmF0ZSAgLTEuMTE4MCAgICAgMC40NTEzICAtMi40NzggMC4wMTQ1NTMgKiAgXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDEwOS4zIG9uIDEyNiBkZWdyZWVzIG9mIGZyZWVkb21cbiAgKDU5IG9ic2VydmF0aW9ucyBkZWxldGVkIGR1ZSB0byBtaXNzaW5nbmVzcylcbk11bHRpcGxlIFItc3F1YXJlZDogIDAuNjYzNSxcdEFkanVzdGVkIFItc3F1YXJlZDogIDAuNjQ3NSBcbkYtc3RhdGlzdGljOiA0MS40MSBvbiA2IGFuZCAxMjYgREYsICBwLXZhbHVlOiA8IDIuMmUtMTZcbiJ9 -->
 <pre><code>
 Call:
-lm(formula = deathsper100000 ~ gdpcap + urbpop + HealthExppCap + 
-    AirTransport + AgeDependancy + MilitaryEx + HospitalBeds + 
-    PovertyRate, data = FullStats, na.rm = TRUE)
+lm(formula = deathsper100000 ~ urbpop + AgeDependancy + HospitalBeds + 
+    gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 
+    0, data = FullStats, na.rm = TRUE)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--241.37  -76.13  -12.40   50.47  458.19 
+-189.14  -63.88  -12.28   44.88  485.56 
 
 Coefficients:
-                Estimate Std. Error t value Pr(&gt;|t|)  
-(Intercept)   209.660585 100.975766   2.076   0.0407 *
-gdpcap         -1.320509   1.669797  -0.791   0.4311  
-urbpop          1.458921   0.838218   1.741   0.0852 .
-HealthExppCap   0.569141   1.745873   0.326   0.7452  
-AirTransport   -0.005486   0.020658  -0.266   0.7912  
-AgeDependancy  -2.888306   1.389158  -2.079   0.0404 *
-MilitaryEx     -3.174974   9.575424  -0.332   0.7410  
-HospitalBeds   11.903449   5.428056   2.193   0.0309 *
-PovertyRate    -0.369769   1.174798  -0.315   0.7537  
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+urbpop                     2.5875     0.4481   5.774 5.69e-08 ***
+AgeDependancy             -1.5811     0.4102  -3.854 0.000184 ***
+HospitalBeds              61.2697    13.3994   4.573 1.14e-05 ***
+gdpcap:PovertyRate         1.3672     0.5067   2.698 0.007927 ** 
+urbpop:HospitalBeds       -0.6383     0.1877  -3.401 0.000900 ***
+HospitalBeds:PovertyRate  -1.1180     0.4513  -2.478 0.014553 *  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 119.1 on 90 degrees of freedom
-  (92 observations deleted due to missingness)
-Multiple R-squared:  0.269, Adjusted R-squared:  0.204 
-F-statistic:  4.14 on 8 and 90 DF,  p-value: 0.0003033</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBObyBQb3ZlcnR5IFJhdGVcbmRlYXRocmF0ZTIuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBBaXJUcmFuc3BvcnQgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcywgbmEucm0gPSBUUlVFKVxuYGBgIn0= -->
-<pre class="r"><code># No Poverty Rate
-deathrate2.fit &lt;- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds, na.rm = TRUE)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogSW4gbG0uZml0KHgsIHksIG9mZnNldCA9IG9mZnNldCwgc2luZ3VsYXIub2sgPSBzaW5ndWxhci5vaywgLi4uKSA6XG4gZXh0cmEgYXJndW1lbnQg4oCYbmEucm3igJkgd2lsbCBiZSBkaXNyZWdhcmRlZFxuIn0= -->
-<pre><code>Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
- extra argument ‘na.rm’ will be disregarded</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZWF0aHJhdGUyLmZpdClcbmBgYCJ9 -->
-<pre class="r"><code>summary(deathrate2.fit)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBcbiAgICBBaXJUcmFuc3BvcnQgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcywgXG4gICAgZGF0YSA9IEZ1bGxTdGF0cywgbmEucm0gPSBUUlVFKVxuXG5SZXNpZHVhbHM6XG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMjc3LjA3ICAtNjguMjIgIC0yMC4wMCAgIDU4LjA5ICA0NzkuODIgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fCkgICBcbihJbnRlcmNlcHQpICAgMjAzLjMxMDE2MyAgODcuNjIxMDIyICAgMi4zMjAgIDAuMDIyMjQgKiBcbmdkcGNhcCAgICAgICAgIC0yLjk3NzAyMyAgIDEuNDQwNTcyICAtMi4wNjcgIDAuMDQxMjEgKiBcbnVyYnBvcCAgICAgICAgICAxLjA5ODUxOCAgIDAuNzEyOTU0ICAgMS41NDEgIDAuMTI2MzUgICBcbkhlYWx0aEV4cHBDYXAgICAyLjE2NzEyOCAgIDEuNTMxMjk5ICAgMS40MTUgIDAuMTU5OTMgICBcbkFpclRyYW5zcG9ydCAgIC0wLjAwNzQwOCAgIDAuMDE5OTIxICAtMC4zNzIgIDAuNzEwNzUgICBcbkFnZURlcGVuZGFuY3kgIC0yLjQ0NDU1NyAgIDEuMDEzNzE2ICAtMi40MTEgIDAuMDE3NjEgKiBcbk1pbGl0YXJ5RXggICAgLTEyLjM0Njc4MiAgIDcuMDI2NDk2ICAtMS43NTcgIDAuMDgxNzggLiBcbkhvc3BpdGFsQmVkcyAgIDE1Ljg1MjU0OCAgIDUuMDU1MjQ1ICAgMy4xMzYgIDAuMDAyMjIgKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5SZXNpZHVhbCBzdGFuZGFyZCBlcnJvcjogMTE3LjYgb24gMTA2IGRlZ3JlZXMgb2YgZnJlZWRvbVxuICAoNzcgb2JzZXJ2YXRpb25zIGRlbGV0ZWQgZHVlIHRvIG1pc3NpbmduZXNzKVxuTXVsdGlwbGUgUi1zcXVhcmVkOiAgMC4yMjcxLFx0QWRqdXN0ZWQgUi1zcXVhcmVkOiAgMC4xNzYxIFxuRi1zdGF0aXN0aWM6IDQuNDQ5IG9uIDcgYW5kIDEwNiBERiwgIHAtdmFsdWU6IDAuMDAwMjI2MlxuIn0= -->
-<pre><code>
-Call:
-lm(formula = deathsper100000 ~ gdpcap + urbpop + HealthExppCap + 
-    AirTransport + AgeDependancy + MilitaryEx + HospitalBeds, 
-    data = FullStats, na.rm = TRUE)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--277.07  -68.22  -20.00   58.09  479.82 
-
-Coefficients:
-                Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)   203.310163  87.621022   2.320  0.02224 * 
-gdpcap         -2.977023   1.440572  -2.067  0.04121 * 
-urbpop          1.098518   0.712954   1.541  0.12635   
-HealthExppCap   2.167128   1.531299   1.415  0.15993   
-AirTransport   -0.007408   0.019921  -0.372  0.71075   
-AgeDependancy  -2.444557   1.013716  -2.411  0.01761 * 
-MilitaryEx    -12.346782   7.026496  -1.757  0.08178 . 
-HospitalBeds   15.852548   5.055245   3.136  0.00222 **
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 117.6 on 106 degrees of freedom
-  (77 observations deleted due to missingness)
-Multiple R-squared:  0.2271,    Adjusted R-squared:  0.1761 
-F-statistic: 4.449 on 7 and 106 DF,  p-value: 0.0002262</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBObyBBaXIgVHJhbnNwb3J0XG5kZWF0aHJhdGUzLmZpdCA8LSBsbShkYXRhID0gRnVsbFN0YXRzLCBkZWF0aHNwZXIxMDAwMDAgfiBnZHBjYXAgKyB1cmJwb3AgKyBIZWFsdGhFeHBwQ2FwICsgQWdlRGVwZW5kYW5jeSArIE1pbGl0YXJ5RXggKyBIb3NwaXRhbEJlZHMsIG5hLnJtID0gVFJVRSlcbmBgYCJ9 -->
-<pre class="r"><code># No Air Transport
-deathrate3.fit &lt;- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + HealthExppCap + AgeDependancy + MilitaryEx + HospitalBeds, na.rm = TRUE)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogSW4gbG0uZml0KHgsIHksIG9mZnNldCA9IG9mZnNldCwgc2luZ3VsYXIub2sgPSBzaW5ndWxhci5vaywgLi4uKSA6XG4gZXh0cmEgYXJndW1lbnQg4oCYbmEucm3igJkgd2lsbCBiZSBkaXNyZWdhcmRlZFxuIn0= -->
-<pre><code>Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
- extra argument ‘na.rm’ will be disregarded</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZWF0aHJhdGUzLmZpdClcbmBgYCJ9 -->
-<pre class="r"><code>summary(deathrate3.fit)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBcbiAgICBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcywgZGF0YSA9IEZ1bGxTdGF0cywgXG4gICAgbmEucm0gPSBUUlVFKVxuXG5SZXNpZHVhbHM6XG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMjc4LjQ0ICAtNjcuNjAgIC0xNi4wNSAgIDU2Ljg3ICA0ODIuNzMgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciB0IHZhbHVlIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgICAyMTYuMzYxNCAgICA3Ni44ODc4ICAgMi44MTQgIDAuMDA1NjkgKiogXG5nZHBjYXAgICAgICAgICAtMi44Mjk0ICAgICAxLjI4MDIgIC0yLjIxMCAgMC4wMjg5MSAqICBcbnVyYnBvcCAgICAgICAgICAwLjk5NjEgICAgIDAuNjUwMCAgIDEuNTMyICAwLjEyNzk2ICAgIFxuSGVhbHRoRXhwcENhcCAgIDIuMDIyOCAgICAgMS4yNjQyICAgMS42MDAgIDAuMTEyMDkgICAgXG5BZ2VEZXBlbmRhbmN5ICAtMi42NjgwICAgICAwLjgzMDYgIC0zLjIxMiAgMC4wMDE2OCAqKiBcbk1pbGl0YXJ5RXggICAgLTExLjA4NzkgICAgIDYuNjgyNiAgLTEuNjU5ICAwLjA5OTU4IC4gIFxuSG9zcGl0YWxCZWRzICAgMTYuNDE3MyAgICAgNC43ODcxICAgMy40MjkgIDAuMDAwODIgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDExNS44IG9uIDEyNSBkZWdyZWVzIG9mIGZyZWVkb21cbiAgKDU5IG9ic2VydmF0aW9ucyBkZWxldGVkIGR1ZSB0byBtaXNzaW5nbmVzcylcbk11bHRpcGxlIFItc3F1YXJlZDogIDAuMjcxOCxcdEFkanVzdGVkIFItc3F1YXJlZDogIDAuMjM2OCBcbkYtc3RhdGlzdGljOiA3Ljc3NiBvbiA2IGFuZCAxMjUgREYsICBwLXZhbHVlOiA0LjA0NmUtMDdcbiJ9 -->
-<pre><code>
-Call:
-lm(formula = deathsper100000 ~ gdpcap + urbpop + HealthExppCap + 
-    AgeDependancy + MilitaryEx + HospitalBeds, data = FullStats, 
-    na.rm = TRUE)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--278.44  -67.60  -16.05   56.87  482.73 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   216.3614    76.8878   2.814  0.00569 ** 
-gdpcap         -2.8294     1.2802  -2.210  0.02891 *  
-urbpop          0.9961     0.6500   1.532  0.12796    
-HealthExppCap   2.0228     1.2642   1.600  0.11209    
-AgeDependancy  -2.6680     0.8306  -3.212  0.00168 ** 
-MilitaryEx    -11.0879     6.6826  -1.659  0.09958 .  
-HospitalBeds   16.4173     4.7871   3.429  0.00082 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 115.8 on 125 degrees of freedom
+Residual standard error: 109.3 on 126 degrees of freedom
   (59 observations deleted due to missingness)
-Multiple R-squared:  0.2718,    Adjusted R-squared:  0.2368 
-F-statistic: 7.776 on 6 and 125 DF,  p-value: 4.046e-07</code></pre>
+Multiple R-squared:  0.6635,    Adjusted R-squared:  0.6475 
+F-statistic: 41.41 on 6 and 126 DF,  p-value: &lt; 2.2e-16</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBObyBNaWxpdGFyeUV4XG5kZWF0aHJhdGU0LmZpdCA8LSBsbShkYXRhID0gRnVsbFN0YXRzLCBkZWF0aHNwZXIxMDAwMDAgfiBnZHBjYXAgK3VyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBBZ2VEZXBlbmRhbmN5ICsgSG9zcGl0YWxCZWRzLCBuYS5ybSA9IFRSVUUpXG5gYGAifQ== -->
-<pre class="r"><code># No MilitaryEx
-deathrate4.fit &lt;- lm(data = FullStats, deathsper100000 ~ gdpcap +urbpop + HealthExppCap + AgeDependancy + HospitalBeds, na.rm = TRUE)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQUlDKGRlYXRocmF0ZS5maXQpXG5gYGAifQ== -->
+<pre class="r"><code>AIC(deathrate.fit)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogSW4gbG0uZml0KHgsIHksIG9mZnNldCA9IG9mZnNldCwgc2luZ3VsYXIub2sgPSBzaW5ndWxhci5vaywgLi4uKSA6XG4gZXh0cmEgYXJndW1lbnQg4oCYbmEucm3igJkgd2lsbCBiZSBkaXNyZWdhcmRlZFxuIn0= -->
-<pre><code>Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
- extra argument ‘na.rm’ will be disregarded</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZWF0aHJhdGU0LmZpdClcbmBgYCJ9 -->
-<pre class="r"><code>summary(deathrate4.fit)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBcbiAgICBBZ2VEZXBlbmRhbmN5ICsgSG9zcGl0YWxCZWRzLCBkYXRhID0gRnVsbFN0YXRzLCBuYS5ybSA9IFRSVUUpXG5cblJlc2lkdWFsczpcbiAgICBNaW4gICAgICAxUSAgTWVkaWFuICAgICAgM1EgICAgIE1heCBcbi0yODQuOTMgIC03MS4zNiAgLTE5LjU0ICAgNjMuMDYgIDUwNC4zNyBcblxuQ29lZmZpY2llbnRzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgIDE1Ni4wNzcyICAgIDY1LjU1ODYgICAyLjM4MSAgMC4wMTg2MCAqICBcbmdkcGNhcCAgICAgICAgIC0yLjc0ODEgICAgIDEuMjMyNSAgLTIuMjMwICAwLjAyNzMyICogIFxudXJicG9wICAgICAgICAgIDAuOTYxOCAgICAgMC41NDE4ICAgMS43NzUgIDAuMDc4MDAgLiAgXG5IZWFsdGhFeHBwQ2FwICAgMi4wMjc1ICAgICAxLjIyMDEgICAxLjY2MiAgMC4wOTg3NCAuICBcbkFnZURlcGVuZGFuY3kgIC0yLjIwODIgICAgIDAuNzQzOCAgLTIuOTY5ICAwLjAwMzUxICoqIFxuSG9zcGl0YWxCZWRzICAgMTguMjI5MyAgICAgNC41NDYwICAgNC4wMTAgOS43NWUtMDUgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDExMy4yIG9uIDE0MyBkZWdyZWVzIG9mIGZyZWVkb21cbiAgKDQyIG9ic2VydmF0aW9ucyBkZWxldGVkIGR1ZSB0byBtaXNzaW5nbmVzcylcbk11bHRpcGxlIFItc3F1YXJlZDogIDAuMjYyNCxcdEFkanVzdGVkIFItc3F1YXJlZDogIDAuMjM2NiBcbkYtc3RhdGlzdGljOiAxMC4xNyBvbiA1IGFuZCAxNDMgREYsICBwLXZhbHVlOiAyLjM2MWUtMDhcbiJ9 -->
-<pre><code>
-Call:
-lm(formula = deathsper100000 ~ gdpcap + urbpop + HealthExppCap + 
-    AgeDependancy + HospitalBeds, data = FullStats, na.rm = TRUE)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--284.93  -71.36  -19.54   63.06  504.37 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   156.0772    65.5586   2.381  0.01860 *  
-gdpcap         -2.7481     1.2325  -2.230  0.02732 *  
-urbpop          0.9618     0.5418   1.775  0.07800 .  
-HealthExppCap   2.0275     1.2201   1.662  0.09874 .  
-AgeDependancy  -2.2082     0.7438  -2.969  0.00351 ** 
-HospitalBeds   18.2293     4.5460   4.010 9.75e-05 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 113.2 on 143 degrees of freedom
-  (42 observations deleted due to missingness)
-Multiple R-squared:  0.2624,    Adjusted R-squared:  0.2366 
-F-statistic: 10.17 on 5 and 143 DF,  p-value: 2.361e-08</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBObyBIZWFsdGhFeHBcbmRlYXRocmF0ZTUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMsIG5hLnJtID0gVFJVRSlcbmBgYCJ9 -->
-<pre class="r"><code># No HealthExp
-deathrate5.fit &lt;- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop + AgeDependancy + HospitalBeds, na.rm = TRUE)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogSW4gbG0uZml0KHgsIHksIG9mZnNldCA9IG9mZnNldCwgc2luZ3VsYXIub2sgPSBzaW5ndWxhci5vaywgLi4uKSA6XG4gZXh0cmEgYXJndW1lbnQg4oCYbmEucm3igJkgd2lsbCBiZSBkaXNyZWdhcmRlZFxuIn0= -->
-<pre><code>Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
- extra argument ‘na.rm’ will be disregarded</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZWF0aHJhdGU1LmZpdClcbmBgYCJ9 -->
-<pre class="r"><code>summary(deathrate5.fit)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBcbiAgICBIb3NwaXRhbEJlZHMsIGRhdGEgPSBGdWxsU3RhdHMsIG5hLnJtID0gVFJVRSlcblxuUmVzaWR1YWxzOlxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTI4Mi4yNCAgLTY5LjI5ICAtMjEuNDUgICA1Ny44MCAgNTA2LjQxIFxuXG5Db2VmZmljaWVudHM6XG4gICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICAgMTI4LjYyODUgICAgNjIuNjYxOSAgIDIuMDUzICAgMC4wNDE5ICogIFxuZ2RwY2FwICAgICAgICAgLTAuODczNiAgICAgMC41NTU1ICAtMS41NzMgICAwLjExODAgICAgXG51cmJwb3AgICAgICAgICAgMS4wMDI5ICAgICAwLjUzNTUgICAxLjg3MyAgIDAuMDYzMSAuICBcbkFnZURlcGVuZGFuY3kgIC0xLjg3MTYgICAgIDAuNzAyOCAgLTIuNjYzICAgMC4wMDg2ICoqIFxuSG9zcGl0YWxCZWRzICAgMTkuMDU3MiAgICAgNC41MDY2ICAgNC4yMjkgNC4xMWUtMDUgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDExMi45IG9uIDE0NyBkZWdyZWVzIG9mIGZyZWVkb21cbiAgKDM5IG9ic2VydmF0aW9ucyBkZWxldGVkIGR1ZSB0byBtaXNzaW5nbmVzcylcbk11bHRpcGxlIFItc3F1YXJlZDogIDAuMjQ4OCxcdEFkanVzdGVkIFItc3F1YXJlZDogIDAuMjI4NCBcbkYtc3RhdGlzdGljOiAxMi4xNyBvbiA0IGFuZCAxNDcgREYsICBwLXZhbHVlOiAxLjQyMmUtMDhcbiJ9 -->
-<pre><code>
-Call:
-lm(formula = deathsper100000 ~ gdpcap + urbpop + AgeDependancy + 
-    HospitalBeds, data = FullStats, na.rm = TRUE)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--282.24  -69.29  -21.45   57.80  506.41 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   128.6285    62.6619   2.053   0.0419 *  
-gdpcap         -0.8736     0.5555  -1.573   0.1180    
-urbpop          1.0029     0.5355   1.873   0.0631 .  
-AgeDependancy  -1.8716     0.7028  -2.663   0.0086 ** 
-HospitalBeds   19.0572     4.5066   4.229 4.11e-05 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 112.9 on 147 degrees of freedom
-  (39 observations deleted due to missingness)
-Multiple R-squared:  0.2488,    Adjusted R-squared:  0.2284 
-F-statistic: 12.17 on 4 and 147 DF,  p-value: 1.422e-08</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE2MjEuNzkzXG4ifQ== -->
+<pre><code>[1] 1621.793</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAzNFxuZGVhdGhyYXRlLmZpdCA8LSBsbShkYXRhID0gRnVsbFN0YXRzLCBkZWF0aHNwZXIxMDAwMDAgfiBnZHBjYXAgKyB1cmJwb3AgICsgQWlyVHJhbnNwb3J0ICsgQWdlRGVwZW5kYW5jeSArIE1pbGl0YXJ5RXggKyBIb3NwaXRhbEJlZHMgICsgZ2RwY2FwOkhlYWx0aEV4cHBDYXAgKyBnZHBjYXA6dXJicG9wICsgdXJicG9wOkFnZURlcGVuZGFuY3kgKyBnZHBjYXA6UG92ZXJ0eVJhdGUgKyB1cmJwb3A6SG9zcGl0YWxCZWRzICsgUG92ZXJ0eVJhdGU6SG9zcGl0YWxCZWRzICsgQWlyVHJhbnNwb3J0OmdkcGNhcCArIDAgLCBuYS5ybSA9IFRSVUUpXG5gYGAifQ== -->
+<pre class="r"><code># 34
+deathrate.fit &lt;- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop  + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds  + gdpcap:HealthExppCap + gdpcap:urbpop + urbpop:AgeDependancy + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + AirTransport:gdpcap + 0 , na.rm = TRUE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogSW4gbG0uZml0KHgsIHksIG9mZnNldCA9IG9mZnNldCwgc2luZ3VsYXIub2sgPSBzaW5ndWxhci5vaywgLi4uKSA6XG4gZXh0cmEgYXJndW1lbnQg4oCYbmEucm3igJkgd2lsbCBiZSBkaXNyZWdhcmRlZFxuIn0= -->
+<pre><code>Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
+ extra argument ‘na.rm’ will be disregarded</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZWF0aHJhdGUuZml0KVxuYGBgIn0= -->
+<pre class="r"><code>summary(deathrate.fit)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEFpclRyYW5zcG9ydCArIFxuICAgIEFnZURlcGVuZGFuY3kgKyBNaWxpdGFyeUV4ICsgSG9zcGl0YWxCZWRzICsgZ2RwY2FwOkhlYWx0aEV4cHBDYXAgKyBcbiAgICBnZHBjYXA6dXJicG9wICsgdXJicG9wOkFnZURlcGVuZGFuY3kgKyBnZHBjYXA6UG92ZXJ0eVJhdGUgKyBcbiAgICB1cmJwb3A6SG9zcGl0YWxCZWRzICsgUG92ZXJ0eVJhdGU6SG9zcGl0YWxCZWRzICsgQWlyVHJhbnNwb3J0OmdkcGNhcCArIFxuICAgIDAsIGRhdGEgPSBGdWxsU3RhdHMsIG5hLnJtID0gVFJVRSlcblxuUmVzaWR1YWxzOlxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTIxMi4xOSAgLTY5LjUyICAgLTguMTEgICA0OS4zNiAgNDQyLjU4IFxuXG5Db2VmZmljaWVudHM6XG4gICAgICAgICAgICAgICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fCkgICAgXG5nZHBjYXAgICAgICAgICAgICAgICAgICAgIDUuNzE2OTg0NyAgNC4xMDA4MDI2ICAgMS4zOTQgIDAuMTY2ODcgICAgXG51cmJwb3AgICAgICAgICAgICAgICAgICAgIDUuMTcyNTMyOCAgMS4yMTMxMTc1ICAgNC4yNjQgNS4xM2UtMDUgKioqXG5BaXJUcmFuc3BvcnQgICAgICAgICAgICAgLTAuMDg4NTQzMiAgMC4wMzU2NTQzICAtMi40ODMgIDAuMDE0OTYgKiAgXG5BZ2VEZXBlbmRhbmN5ICAgICAgICAgICAgLTAuOTMyODI5NSAgMC44NzI2NDk0ICAtMS4wNjkgIDAuMjg4MDggICAgXG5NaWxpdGFyeUV4ICAgICAgICAgICAgICAgLTIuNzIyNTEyNyAgOC45MzE2NDYzICAtMC4zMDUgIDAuNzYxMjQgICAgXG5Ib3NwaXRhbEJlZHMgICAgICAgICAgICAgMzcuNjY1MzYxNyAyMS44MjI2NzU1ICAgMS43MjYgIDAuMDg3OTQgLiAgXG5nZHBjYXA6SGVhbHRoRXhwcENhcCAgICAgLTAuMDQwMDgyNSAgMC4wMjUzMjg2ICAtMS41ODMgIDAuMTE3MjEgICAgXG5nZHBjYXA6dXJicG9wICAgICAgICAgICAgLTAuMDUxMTQ5NiAgMC4wNDU2NjA4ICAtMS4xMjAgIDAuMjY1NzQgICAgXG51cmJwb3A6QWdlRGVwZW5kYW5jeSAgICAgLTAuMDQ5MzU5MyAgMC4wMjg3MzM2ICAtMS43MTggIDAuMDg5NDMgLiAgXG5nZHBjYXA6UG92ZXJ0eVJhdGUgICAgICAgIDEuMzY2MzE5MCAgMC41OTY0OTAwICAgMi4yOTEgIDAuMDI0NDMgKiAgXG51cmJwb3A6SG9zcGl0YWxCZWRzICAgICAgLTAuMzUwNDI1NSAgMC4yOTU2OTc0ICAtMS4xODUgIDAuMjM5MjUgICAgXG5Ib3NwaXRhbEJlZHM6UG92ZXJ0eVJhdGUgLTAuODc0NTUwMSAgMC41Mjc2OTA2ICAtMS42NTcgIDAuMTAxMTAgICAgXG5nZHBjYXA6QWlyVHJhbnNwb3J0ICAgICAgIDAuMDAxOTA4NiAgMC4wMDA3MTEzICAgMi42ODMgIDAuMDA4NzUgKiogXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDEwOC41IG9uIDg2IGRlZ3JlZXMgb2YgZnJlZWRvbVxuICAoOTIgb2JzZXJ2YXRpb25zIGRlbGV0ZWQgZHVlIHRvIG1pc3NpbmduZXNzKVxuTXVsdGlwbGUgUi1zcXVhcmVkOiAgMC43NDI3LFx0QWRqdXN0ZWQgUi1zcXVhcmVkOiAgMC43MDM4IFxuRi1zdGF0aXN0aWM6IDE5LjA5IG9uIDEzIGFuZCA4NiBERiwgIHAtdmFsdWU6IDwgMi4yZS0xNlxuIn0= -->
+<pre><code>
+Call:
+lm(formula = deathsper100000 ~ gdpcap + urbpop + AirTransport + 
+    AgeDependancy + MilitaryEx + HospitalBeds + gdpcap:HealthExppCap + 
+    gdpcap:urbpop + urbpop:AgeDependancy + gdpcap:PovertyRate + 
+    urbpop:HospitalBeds + PovertyRate:HospitalBeds + AirTransport:gdpcap + 
+    0, data = FullStats, na.rm = TRUE)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-212.19  -69.52   -8.11   49.36  442.58 
+
+Coefficients:
+                           Estimate Std. Error t value Pr(&gt;|t|)    
+gdpcap                    5.7169847  4.1008026   1.394  0.16687    
+urbpop                    5.1725328  1.2131175   4.264 5.13e-05 ***
+AirTransport             -0.0885432  0.0356543  -2.483  0.01496 *  
+AgeDependancy            -0.9328295  0.8726494  -1.069  0.28808    
+MilitaryEx               -2.7225127  8.9316463  -0.305  0.76124    
+HospitalBeds             37.6653617 21.8226755   1.726  0.08794 .  
+gdpcap:HealthExppCap     -0.0400825  0.0253286  -1.583  0.11721    
+gdpcap:urbpop            -0.0511496  0.0456608  -1.120  0.26574    
+urbpop:AgeDependancy     -0.0493593  0.0287336  -1.718  0.08943 .  
+gdpcap:PovertyRate        1.3663190  0.5964900   2.291  0.02443 *  
+urbpop:HospitalBeds      -0.3504255  0.2956974  -1.185  0.23925    
+HospitalBeds:PovertyRate -0.8745501  0.5276906  -1.657  0.10110    
+gdpcap:AirTransport       0.0019086  0.0007113   2.683  0.00875 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 108.5 on 86 degrees of freedom
+  (92 observations deleted due to missingness)
+Multiple R-squared:  0.7427,    Adjusted R-squared:  0.7038 
+F-statistic: 19.09 on 13 and 86 DF,  p-value: &lt; 2.2e-16</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQUlDKGRlYXRocmF0ZS5maXQpXG5gYGAifQ== -->
+<pre class="r"><code>AIC(deathrate.fit)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEyMjIuOTcxXG4ifQ== -->
+<pre><code>[1] 1222.971</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQWxsTW9kZWxzIDwtIG9sc19zdGVwX2FsbF9wb3NzaWJsZShkZWF0aHJhdGUuZml0KVxuYGBgIn0= -->
+<pre class="r"><code>AllModels &lt;- ols_step_all_possible(deathrate.fit)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -547,7 +444,7 @@ summary(caserate.fit)
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAzODAgRmluYWwgUHJvamVjdCIKYXV0aG9yOiAiVHJpc3RhbiBaYW5vd2ljLCBFdmFuIFNwaW5uZXksIEp1bGlhbiBTaW0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMgRnJvbnQgTWF0dGVyCgojIyBDbGVhciBFbnZpcm9ubWVudApgYGB7cn0KIyBybShsaXN0ID0gbHMoKSkKYGBgCgojIyBMaWJyYXJ5IENhbGxzCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShMYWhtYW4pCmxpYnJhcnkocmVzaGFwZTIpCmxpYnJhcnkobWRzcikKbGlicmFyeShtdnRub3JtKQpsaWJyYXJ5KGZhY3RvZXh0cmEpCmxpYnJhcnkoY2x1c3RlcikKbGlicmFyeShsZWFwcykKbGlicmFyeShjYXJldCkKbGlicmFyeShJU0xSMikKYGBgCgojIyBMb2FkaW5nIERhdGEKYGBge3J9CkZ1bGxTdGF0cyA8LSByZWFkLmNzdigiRnVsbFN0YXRzLmNzdiIpCkZ1bGxTdGF0cyA8LQogIEZ1bGxTdGF0cyAlPiUKICByZW5hbWUoZGVhdGhzcGVyMTAwMDAwID0gRGVhdGhzLi4uY3VtdWxhdGl2ZS50b3RhbC5wZXIuMTAwMDAwLnBvcHVsYXRpb24sIGNhc2VzcGVyMTAwMDAwID0gQ2FzZXMuLi5jdW11bGF0aXZlLnRvdGFsLnBlci4xMDAwMDAucG9wdWxhdGlvbikKaGVhZChGdWxsU3RhdHMpClZhY2NpbmVEYXRhIDwtIHJlYWQuY3N2KCJ2YWNjaW5hdGlvbi1kYXRhLmNzdiIpCkZ1bGxTdGF0cyRnZHBjYXAgPC0gRnVsbFN0YXRzJGdkcGNhcC8xMDAwCkZ1bGxTdGF0cyRBaXJUcmFuc3BvcnQgPC0gRnVsbFN0YXRzJEFpclRyYW5zcG9ydC8xMDAwCkZ1bGxTdGF0cyRIZWFsdGhFeHBwQ2FwIDwtIEZ1bGxTdGF0cyRIZWFsdGhFeHBwQ2FwLzEwMApgYGAKCgoKIyBFeHBsb3JhdG9yeSBEYXRhIEFuYWx5c2lzCgojIyBDT1ZJRC0xOSBSYXRlcyBieSBHZW9ncmFwaGljYWwgUmVnaW9uCmBgYHtyfQpGdWxsU3RhdHMgJT4lCiAgZ3JvdXBfYnkoV0hPLlJlZ2lvbikgJT4lCiAgc3VtbWFyaXNlKGNvdW50cmllcyA9IG4oKSwgYXZnY292aWRjYXNlcyA9IG1lYW4odG90YWxjYXNlcyksIGF2Z2NvdmlkZGVhdGhzID0gbWVhbih0b3RhbGRlYXRocyksIGRlYXRocmF0ZSA9IChhdmdjb3ZpZGRlYXRocy9hdmdjb3ZpZGNhc2VzKSkKYGBgCgojIyBFeHBsb3JpbmcgRGVhdGggUmF0ZXMgdnMgT3RoZXIgUGFyYW1ldGVycwpgYGB7cn0KRnVsbFN0YXRzICU+JQogIGdncGxvdChhZXMoeCA9IChnZHBjYXApLCB5ID0gZGVhdGhyYXRlLCBuYS5ybSA9IFRSVUUpKSArCiAgZ2VvbV9wb2ludChhZXMoY29sb3IgPSBXSE8uUmVnaW9uKSkgCkZ1bGxTdGF0cyAlPiUKICBnZ3Bsb3QoYWVzKHggPSAodXJicG9wKSwgeSA9IGRlYXRocmF0ZSwgbmEucm0gPSBUUlVFKSkgKwogIGdlb21fcG9pbnQoYWVzKGNvbG9yID0gV0hPLlJlZ2lvbikpIApgYGAKCiMjIElkZW50aWZ5aW5nIE91dGxpZXJzCgpgYGB7cn0KIyBZRU1FTiwgTU9OQUNPCmBgYAoKIyMgTXVsdGlwbGUgTGluZWFyIFJlZ3Jlc3Npb24gLSBEZWF0aHMgcGVyIDEwMDAwMAoKYGBge3J9CiMgQWxsIFZhcmlhYmxlcwpkZWF0aHJhdGUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBBaXJUcmFuc3BvcnQgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlLCBuYS5ybSA9IFRSVUUpCnN1bW1hcnkoZGVhdGhyYXRlLmZpdCkKCiMgTm8gUG92ZXJ0eSBSYXRlCmRlYXRocmF0ZTIuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBBaXJUcmFuc3BvcnQgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcywgbmEucm0gPSBUUlVFKQpzdW1tYXJ5KGRlYXRocmF0ZTIuZml0KQoKIyBObyBBaXIgVHJhbnNwb3J0CmRlYXRocmF0ZTMuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcywgbmEucm0gPSBUUlVFKQpzdW1tYXJ5KGRlYXRocmF0ZTMuZml0KQoKIyBObyBNaWxpdGFyeUV4CmRlYXRocmF0ZTQuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArdXJicG9wICsgSGVhbHRoRXhwcENhcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMsIG5hLnJtID0gVFJVRSkKc3VtbWFyeShkZWF0aHJhdGU0LmZpdCkKCiMgTm8gSGVhbHRoRXhwCmRlYXRocmF0ZTUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMsIG5hLnJtID0gVFJVRSkKc3VtbWFyeShkZWF0aHJhdGU1LmZpdCkKYGBgCgpgYGB7cn0KCmBgYAoKCiMgTXVsdGlwbGUgTGluZWFyIFJlZ3Jlc3Npb24gLSBDYXNlcyBQZXIgMTAwMDAwCmBgYHtyfQojIENhc2UgUmF0ZSAtIEFsbCBWYXJzCmNhc2VyYXRlLmZpdCA8LSBsbShkYXRhID0gRnVsbFN0YXRzTkEsIGNhc2VzcGVyMTAwMDAwIH4gIGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBBaXJUcmFuc3BvcnQgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlLCBuYS5ybSA9IFRSVUUpCnN1bW1hcnkoY2FzZXJhdGUuZml0KQoKCgpgYGA=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAzODAgRmluYWwgUHJvamVjdCIKYXV0aG9yOiAiVHJpc3RhbiBaYW5vd2ljLCBFdmFuIFNwaW5uZXksIEp1bGlhbiBTaW0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMgRnJvbnQgTWF0dGVyCgojIyBDbGVhciBFbnZpcm9ubWVudApgYGB7cn0KIyBybShsaXN0ID0gbHMoKSkKYGBgCgojIyBMaWJyYXJ5IENhbGxzCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShMYWhtYW4pCmxpYnJhcnkocmVzaGFwZTIpCmxpYnJhcnkobWRzcikKbGlicmFyeShtdnRub3JtKQpsaWJyYXJ5KGZhY3RvZXh0cmEpCmxpYnJhcnkoY2x1c3RlcikKbGlicmFyeShsZWFwcykKbGlicmFyeShjYXJldCkKbGlicmFyeShJU0xSMikKbGlicmFyeShvbHNycikKYGBgCgojIyBMb2FkaW5nIERhdGEKYGBge3J9CkZ1bGxTdGF0cyA8LSByZWFkLmNzdigiRnVsbFN0YXRzLmNzdiIpCkZ1bGxTdGF0cyA8LQogIEZ1bGxTdGF0cyAlPiUKICByZW5hbWUoZGVhdGhzcGVyMTAwMDAwID0gRGVhdGhzLi4uY3VtdWxhdGl2ZS50b3RhbC5wZXIuMTAwMDAwLnBvcHVsYXRpb24sIGNhc2VzcGVyMTAwMDAwID0gQ2FzZXMuLi5jdW11bGF0aXZlLnRvdGFsLnBlci4xMDAwMDAucG9wdWxhdGlvbikKaGVhZChGdWxsU3RhdHMpClZhY2NpbmVEYXRhIDwtIHJlYWQuY3N2KCJ2YWNjaW5hdGlvbi1kYXRhLmNzdiIpCkZ1bGxTdGF0cyRnZHBjYXAgPC0gRnVsbFN0YXRzJGdkcGNhcC8xMDAwCkZ1bGxTdGF0cyRBaXJUcmFuc3BvcnQgPC0gRnVsbFN0YXRzJEFpclRyYW5zcG9ydC8xMDAwCkZ1bGxTdGF0cyRIZWFsdGhFeHBwQ2FwIDwtIEZ1bGxTdGF0cyRIZWFsdGhFeHBwQ2FwLzEwMApgYGAKCgoKIyBFeHBsb3JhdG9yeSBEYXRhIEFuYWx5c2lzCgojIyBDT1ZJRC0xOSBSYXRlcyBieSBHZW9ncmFwaGljYWwgUmVnaW9uCmBgYHtyfQpGdWxsU3RhdHMgJT4lCiAgZ3JvdXBfYnkoV0hPLlJlZ2lvbikgJT4lCiAgc3VtbWFyaXNlKGNvdW50cmllcyA9IG4oKSwgYXZnY292aWRjYXNlcyA9IG1lYW4odG90YWxjYXNlcyksIGF2Z2NvdmlkZGVhdGhzID0gbWVhbih0b3RhbGRlYXRocyksIGRlYXRocmF0ZSA9IChhdmdjb3ZpZGRlYXRocy9hdmdjb3ZpZGNhc2VzKSkKYGBgCgojIyBFeHBsb3JpbmcgRGVhdGggUmF0ZXMgdnMgT3RoZXIgUGFyYW1ldGVycwpgYGB7cn0KRnVsbFN0YXRzICU+JQogIGdncGxvdChhZXMoeCA9IChnZHBjYXApLCB5ID0gZGVhdGhyYXRlLCBuYS5ybSA9IFRSVUUpKSArCiAgZ2VvbV9wb2ludChhZXMoY29sb3IgPSBXSE8uUmVnaW9uKSkgCkZ1bGxTdGF0cyAlPiUKICBnZ3Bsb3QoYWVzKHggPSAodXJicG9wKSwgeSA9IGRlYXRocmF0ZSwgbmEucm0gPSBUUlVFKSkgKwogIGdlb21fcG9pbnQoYWVzKGNvbG9yID0gV0hPLlJlZ2lvbikpIApgYGAKCiMjIElkZW50aWZ5aW5nIE91dGxpZXJzCgpgYGB7cn0KIyBZRU1FTiwgTU9OQUNPCmBgYAoKIyMgTXVsdGlwbGUgTGluZWFyIFJlZ3Jlc3Npb24gLSBEZWF0aHMgcGVyIDEwMDAwMAoKYGBge3J9CiMgQWxsIFZhcmlhYmxlcwpkZWF0aHJhdGUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMgICsgZ2RwY2FwOlBvdmVydHlSYXRlICsgdXJicG9wOkhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlOkhvc3BpdGFsQmVkcyArIDAgLCBuYS5ybSA9IFRSVUUpCnN1bW1hcnkoZGVhdGhyYXRlLmZpdCkKQUlDKGRlYXRocmF0ZS5maXQpCmBgYAoKYGBge3J9CiMgMzQKZGVhdGhyYXRlLmZpdCA8LSBsbShkYXRhID0gRnVsbFN0YXRzLCBkZWF0aHNwZXIxMDAwMDAgfiBnZHBjYXAgKyB1cmJwb3AgICsgQWlyVHJhbnNwb3J0ICsgQWdlRGVwZW5kYW5jeSArIE1pbGl0YXJ5RXggKyBIb3NwaXRhbEJlZHMgICsgZ2RwY2FwOkhlYWx0aEV4cHBDYXAgKyBnZHBjYXA6dXJicG9wICsgdXJicG9wOkFnZURlcGVuZGFuY3kgKyBnZHBjYXA6UG92ZXJ0eVJhdGUgKyB1cmJwb3A6SG9zcGl0YWxCZWRzICsgUG92ZXJ0eVJhdGU6SG9zcGl0YWxCZWRzICsgQWlyVHJhbnNwb3J0OmdkcGNhcCArIDAgLCBuYS5ybSA9IFRSVUUpCnN1bW1hcnkoZGVhdGhyYXRlLmZpdCkKQUlDKGRlYXRocmF0ZS5maXQpCmBgYAoKYGBge3J9CkFsbE1vZGVscyA8LSBvbHNfc3RlcF9hbGxfcG9zc2libGUoZGVhdGhyYXRlLmZpdCkKYGBgCgoKIyBNdWx0aXBsZSBMaW5lYXIgUmVncmVzc2lvbiAtIENhc2VzIFBlciAxMDAwMDAKYGBge3J9CiMgQ2FzZSBSYXRlIC0gQWxsIFZhcnMKY2FzZXJhdGUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHNOQSwgY2FzZXNwZXIxMDAwMDAgfiAgZ2RwY2FwICsgdXJicG9wICsgSGVhbHRoRXhwcENhcCArIEFpclRyYW5zcG9ydCArIEFnZURlcGVuZGFuY3kgKyBNaWxpdGFyeUV4ICsgSG9zcGl0YWxCZWRzICsgUG92ZXJ0eVJhdGUsIG5hLnJtID0gVFJVRSkKc3VtbWFyeShjYXNlcmF0ZS5maXQpCgoKCmBgYA==</div>
 
 
 
