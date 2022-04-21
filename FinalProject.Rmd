@@ -23,6 +23,7 @@ library(cluster)
 library(leaps)
 library(caret)
 library(ISLR2)
+library(ggrepel)
 ```
 
 ## Loading Data
@@ -62,7 +63,40 @@ FullStats %>%
 ## Identifying Outliers
 
 ```{r}
-# YEMEN, MONACO
+is_outlier <- function(x) {
+  return(x < quantile(x, 0.25, na.rm = TRUE) - 1.5 * IQR(x, na.rm = TRUE) | 
+             x > quantile(x, 0.75, na.rm = TRUE) + 1.5 * IQR(x, na.rm = TRUE))
+}
+```
+
+```{r}
+temp <- FullStats %>%
+    group_by(WHO.Region) %>%
+    mutate(outlier = if_else(is_outlier(deathrate), Name, NA_character_),
+           outlierBin = is_outlier(deathrate)) 
+```
+
+
+```{r}
+# main graph
+ggplot(data = temp, aes(x = factor(WHO.Region), y = deathrate, 
+                        fill = factor(WHO.Region))) +
+    geom_boxplot(aes(color = factor(WHO.Region)), show.legend = FALSE) +
+    geom_boxplot(outlier.color = NA) +
+    geom_text_repel(aes(label = outlier), nudge_y = 0.01, na.rm = TRUE, 
+                    show.legend = FALSE,) +
+    theme(
+        # label stylings
+        axis.text.x = element_text(angle = 30, vjust = 1, hjust = 1),
+        plot.title = element_text(size = 15, face = "bold", hjust = 0.5)) +
+    theme(
+        # legend stylings
+        legend.position = c(0.975, 0.95),
+        legend.justification = c("right", "top"),
+        legend.box.background = element_rect(color = "black")) +
+    labs(title = "Death Rates across WHO Regions", 
+         x = "Region", y = "Death Rate",
+         fill = "Region")
 ```
 
 ## Multiple Linear Regression - Deaths per 100000
