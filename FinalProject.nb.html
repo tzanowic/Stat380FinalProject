@@ -348,22 +348,104 @@ ggplot(data = temp, aes(x = factor(WHO.Region), y = deathrate,
 <h2>Multiple Linear Regression - Deaths per 100000</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBbGwgVmFyaWFibGVzXG5kZWF0aHJhdGUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMgICsgZ2RwY2FwOlBvdmVydHlSYXRlICsgdXJicG9wOkhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlOkhvc3BpdGFsQmVkcyArIDAgLCBuYS5ybSA9IFRSVUUpXG5zdW1tYXJ5KGRlYXRocmF0ZS5maXQpXG5BSUMoZGVhdGhyYXRlLmZpdClcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBbGwgVmFyaWFibGVzXG5kZWF0aHJhdGUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMgICsgZ2RwY2FwOlBvdmVydHlSYXRlICsgdXJicG9wOkhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlOkhvc3BpdGFsQmVkcyArIDAgLCBuYS5ybSA9IFRSVUUpXG5gYGAifQ== -->
 <pre class="r"><code># All Variables
-deathrate.fit &lt;- lm(data = FullStats, deathsper100000 ~ urbpop + AgeDependancy + HospitalBeds  + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 0 , na.rm = TRUE)
-summary(deathrate.fit)
-AIC(deathrate.fit)</code></pre>
+deathrate.fit &lt;- lm(data = FullStats, deathsper100000 ~ urbpop + AgeDependancy + HospitalBeds  + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 0 , na.rm = TRUE)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogSW4gbG0uZml0KHgsIHksIG9mZnNldCA9IG9mZnNldCwgc2luZ3VsYXIub2sgPSBzaW5ndWxhci5vaywgLi4uKSA6XG4gZXh0cmEgYXJndW1lbnQg4oCYbmEucm3igJkgd2lsbCBiZSBkaXNyZWdhcmRlZFxuIn0= -->
+<pre><code>Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
+ extra argument ‘na.rm’ will be disregarded</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZWF0aHJhdGUuZml0KVxuYGBgIn0= -->
+<pre class="r"><code>summary(deathrate.fit)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRlYXRoc3BlcjEwMDAwMCB+IHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMgKyBcbiAgICBnZHBjYXA6UG92ZXJ0eVJhdGUgKyB1cmJwb3A6SG9zcGl0YWxCZWRzICsgUG92ZXJ0eVJhdGU6SG9zcGl0YWxCZWRzICsgXG4gICAgMCwgZGF0YSA9IEZ1bGxTdGF0cywgbmEucm0gPSBUUlVFKVxuXG5SZXNpZHVhbHM6XG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMTg5LjE0ICAtNjMuODggIC0xMi4yOCAgIDQ0Ljg4ICA0ODUuNTYgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fCkgICAgXG51cmJwb3AgICAgICAgICAgICAgICAgICAgICAyLjU4NzUgICAgIDAuNDQ4MSAgIDUuNzc0IDUuNjllLTA4ICoqKlxuQWdlRGVwZW5kYW5jeSAgICAgICAgICAgICAtMS41ODExICAgICAwLjQxMDIgIC0zLjg1NCAwLjAwMDE4NCAqKipcbkhvc3BpdGFsQmVkcyAgICAgICAgICAgICAgNjEuMjY5NyAgICAxMy4zOTk0ICAgNC41NzMgMS4xNGUtMDUgKioqXG5nZHBjYXA6UG92ZXJ0eVJhdGUgICAgICAgICAxLjM2NzIgICAgIDAuNTA2NyAgIDIuNjk4IDAuMDA3OTI3ICoqIFxudXJicG9wOkhvc3BpdGFsQmVkcyAgICAgICAtMC42MzgzICAgICAwLjE4NzcgIC0zLjQwMSAwLjAwMDkwMCAqKipcbkhvc3BpdGFsQmVkczpQb3ZlcnR5UmF0ZSAgLTEuMTE4MCAgICAgMC40NTEzICAtMi40NzggMC4wMTQ1NTMgKiAgXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDEwOS4zIG9uIDEyNiBkZWdyZWVzIG9mIGZyZWVkb21cbiAgKDU5IG9ic2VydmF0aW9ucyBkZWxldGVkIGR1ZSB0byBtaXNzaW5nbmVzcylcbk11bHRpcGxlIFItc3F1YXJlZDogIDAuNjYzNSxcdEFkanVzdGVkIFItc3F1YXJlZDogIDAuNjQ3NSBcbkYtc3RhdGlzdGljOiA0MS40MSBvbiA2IGFuZCAxMjYgREYsICBwLXZhbHVlOiA8IDIuMmUtMTZcbiJ9 -->
+<pre><code>
+Call:
+lm(formula = deathsper100000 ~ urbpop + AgeDependancy + HospitalBeds + 
+    gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 
+    0, data = FullStats, na.rm = TRUE)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-189.14  -63.88  -12.28   44.88  485.56 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+urbpop                     2.5875     0.4481   5.774 5.69e-08 ***
+AgeDependancy             -1.5811     0.4102  -3.854 0.000184 ***
+HospitalBeds              61.2697    13.3994   4.573 1.14e-05 ***
+gdpcap:PovertyRate         1.3672     0.5067   2.698 0.007927 ** 
+urbpop:HospitalBeds       -0.6383     0.1877  -3.401 0.000900 ***
+HospitalBeds:PovertyRate  -1.1180     0.4513  -2.478 0.014553 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 109.3 on 126 degrees of freedom
+  (59 observations deleted due to missingness)
+Multiple R-squared:  0.6635,    Adjusted R-squared:  0.6475 
+F-statistic: 41.41 on 6 and 126 DF,  p-value: &lt; 2.2e-16</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQUlDKGRlYXRocmF0ZS5maXQpXG5gYGAifQ== -->
+<pre class="r"><code>AIC(deathrate.fit)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE2MjEuNzkzXG4ifQ== -->
+<pre><code>[1] 1621.793</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAzNFxuZGVhdGhyYXRlLmZpdCA8LSBsbShkYXRhID0gRnVsbFN0YXRzLCBkZWF0aHNwZXIxMDAwMDAgfiBnZHBjYXAgKyB1cmJwb3AgICsgQWlyVHJhbnNwb3J0ICsgQWdlRGVwZW5kYW5jeSArIE1pbGl0YXJ5RXggKyBIb3NwaXRhbEJlZHMgICsgZ2RwY2FwOkhlYWx0aEV4cHBDYXAgKyBnZHBjYXA6dXJicG9wICsgdXJicG9wOkFnZURlcGVuZGFuY3kgKyBnZHBjYXA6UG92ZXJ0eVJhdGUgKyB1cmJwb3A6SG9zcGl0YWxCZWRzICsgUG92ZXJ0eVJhdGU6SG9zcGl0YWxCZWRzICsgQWlyVHJhbnNwb3J0OmdkcGNhcCArIDAgLCBuYS5ybSA9IFRSVUUpXG5zdW1tYXJ5KGRlYXRocmF0ZS5maXQpXG5BSUMoZGVhdGhyYXRlLmZpdClcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAzNFxuZGVhdGhyYXRlLmZpdCA8LSBsbShkYXRhID0gRnVsbFN0YXRzLCBkZWF0aHNwZXIxMDAwMDAgfiBnZHBjYXAgKyB1cmJwb3AgICsgQWlyVHJhbnNwb3J0ICsgQWdlRGVwZW5kYW5jeSArIE1pbGl0YXJ5RXggKyBIb3NwaXRhbEJlZHMgICArIHVyYnBvcDpBZ2VEZXBlbmRhbmN5ICsgZ2RwY2FwOlBvdmVydHlSYXRlICsgdXJicG9wOkhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlOkhvc3BpdGFsQmVkcyArIEFpclRyYW5zcG9ydDpnZHBjYXAgKyAwICwgbmEucm0gPSBUUlVFKVxuYGBgIn0= -->
 <pre class="r"><code># 34
-deathrate.fit &lt;- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop  + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds  + gdpcap:HealthExppCap + gdpcap:urbpop + urbpop:AgeDependancy + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + AirTransport:gdpcap + 0 , na.rm = TRUE)
-summary(deathrate.fit)
-AIC(deathrate.fit)</code></pre>
+deathrate.fit &lt;- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop  + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds   + urbpop:AgeDependancy + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + AirTransport:gdpcap + 0 , na.rm = TRUE)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogSW4gbG0uZml0KHgsIHksIG9mZnNldCA9IG9mZnNldCwgc2luZ3VsYXIub2sgPSBzaW5ndWxhci5vaywgLi4uKSA6XG4gZXh0cmEgYXJndW1lbnQg4oCYbmEucm3igJkgd2lsbCBiZSBkaXNyZWdhcmRlZFxuIn0= -->
+<pre><code>Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
+ extra argument ‘na.rm’ will be disregarded</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShkZWF0aHJhdGUuZml0KVxuYGBgIn0= -->
+<pre class="r"><code>summary(deathrate.fit)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCArIEFpclRyYW5zcG9ydCArIFxuICAgIEFnZURlcGVuZGFuY3kgKyBNaWxpdGFyeUV4ICsgSG9zcGl0YWxCZWRzICsgdXJicG9wOkFnZURlcGVuZGFuY3kgKyBcbiAgICBnZHBjYXA6UG92ZXJ0eVJhdGUgKyB1cmJwb3A6SG9zcGl0YWxCZWRzICsgUG92ZXJ0eVJhdGU6SG9zcGl0YWxCZWRzICsgXG4gICAgQWlyVHJhbnNwb3J0OmdkcGNhcCArIDAsIGRhdGEgPSBGdWxsU3RhdHMsIG5hLnJtID0gVFJVRSlcblxuUmVzaWR1YWxzOlxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTIyNS4wOCAgLTcyLjI5ICAtMTMuNjMgICA1MC43NSAgNDQyLjAyIFxuXG5Db2VmZmljaWVudHM6XG4gICAgICAgICAgICAgICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fCkgICAgXG5nZHBjYXAgICAgICAgICAgICAgICAgICAgLTEuMTUyOTUxOCAgMC42MzgzMDIyICAtMS44MDYgICAwLjA3NDMgLiAgXG51cmJwb3AgICAgICAgICAgICAgICAgICAgIDUuMTc0NDg5NiAgMS4yMTIyMjI3ICAgNC4yNjkgIDQuOWUtMDUgKioqXG5BaXJUcmFuc3BvcnQgICAgICAgICAgICAgLTAuMDgwNjg3OSAgMC4wMzU2MTQ5ICAtMi4yNjYgICAwLjAyNTkgKiAgXG5BZ2VEZXBlbmRhbmN5ICAgICAgICAgICAgLTEuMTI4NDU1NCAgMC44NzA1Mjc4ICAtMS4yOTYgICAwLjE5ODIgICAgXG5NaWxpdGFyeUV4ICAgICAgICAgICAgICAgLTQuMzc4NzI1OSAgOC45MjE2MjQyICAtMC40OTEgICAwLjYyNDggICAgXG5Ib3NwaXRhbEJlZHMgICAgICAgICAgICAgNTQuODA4NTY3NCAxOC43MDIyNTcxICAgMi45MzEgICAwLjAwNDMgKiogXG51cmJwb3A6QWdlRGVwZW5kYW5jeSAgICAgLTAuMDQyNjU0OCAgMC4wMjg2Njc1ICAtMS40ODggICAwLjE0MDMgICAgXG5nZHBjYXA6UG92ZXJ0eVJhdGUgICAgICAgIDEuMzk3ODgzMyAgMC41OTk3ODE4ICAgMi4zMzEgICAwLjAyMjAgKiAgXG51cmJwb3A6SG9zcGl0YWxCZWRzICAgICAgLTAuNTQ4NDA0OSAgMC4yNTk1Njg4ICAtMi4xMTMgICAwLjAzNzQgKiAgXG5Ib3NwaXRhbEJlZHM6UG92ZXJ0eVJhdGUgLTEuMDE2NjI4MCAgMC41MjYyOTk0ICAtMS45MzIgICAwLjA1NjYgLiAgXG5nZHBjYXA6QWlyVHJhbnNwb3J0ICAgICAgIDAuMDAxNDc5MSAgMC4wMDA2NjM5ICAgMi4yMjggICAwLjAyODQgKiAgXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDEwOS4zIG9uIDg5IGRlZ3JlZXMgb2YgZnJlZWRvbVxuICAoOTEgb2JzZXJ2YXRpb25zIGRlbGV0ZWQgZHVlIHRvIG1pc3NpbmduZXNzKVxuTXVsdGlwbGUgUi1zcXVhcmVkOiAgMC43MzA5LFx0QWRqdXN0ZWQgUi1zcXVhcmVkOiAgMC42OTc2IFxuRi1zdGF0aXN0aWM6IDIxLjk4IG9uIDExIGFuZCA4OSBERiwgIHAtdmFsdWU6IDwgMi4yZS0xNlxuIn0= -->
+<pre><code>
+Call:
+lm(formula = deathsper100000 ~ gdpcap + urbpop + AirTransport + 
+    AgeDependancy + MilitaryEx + HospitalBeds + urbpop:AgeDependancy + 
+    gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 
+    AirTransport:gdpcap + 0, data = FullStats, na.rm = TRUE)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-225.08  -72.29  -13.63   50.75  442.02 
+
+Coefficients:
+                           Estimate Std. Error t value Pr(&gt;|t|)    
+gdpcap                   -1.1529518  0.6383022  -1.806   0.0743 .  
+urbpop                    5.1744896  1.2122227   4.269  4.9e-05 ***
+AirTransport             -0.0806879  0.0356149  -2.266   0.0259 *  
+AgeDependancy            -1.1284554  0.8705278  -1.296   0.1982    
+MilitaryEx               -4.3787259  8.9216242  -0.491   0.6248    
+HospitalBeds             54.8085674 18.7022571   2.931   0.0043 ** 
+urbpop:AgeDependancy     -0.0426548  0.0286675  -1.488   0.1403    
+gdpcap:PovertyRate        1.3978833  0.5997818   2.331   0.0220 *  
+urbpop:HospitalBeds      -0.5484049  0.2595688  -2.113   0.0374 *  
+HospitalBeds:PovertyRate -1.0166280  0.5262994  -1.932   0.0566 .  
+gdpcap:AirTransport       0.0014791  0.0006639   2.228   0.0284 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 109.3 on 89 degrees of freedom
+  (91 observations deleted due to missingness)
+Multiple R-squared:  0.7309,    Adjusted R-squared:  0.6976 
+F-statistic: 21.98 on 11 and 89 DF,  p-value: &lt; 2.2e-16</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQUlDKGRlYXRocmF0ZS5maXQpXG5gYGAifQ== -->
+<pre class="r"><code>AIC(deathrate.fit)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEyMzQuODg4XG4ifQ== -->
+<pre><code>[1] 1234.888</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -388,7 +470,7 @@ summary(caserate.fit)
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAzODAgRmluYWwgUHJvamVjdCIKYXV0aG9yOiAiVHJpc3RhbiBaYW5vd2ljLCBFdmFuIFNwaW5uZXksIEp1bGlhbiBTaW0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMgRnJvbnQgTWF0dGVyCgojIyBDbGVhciBFbnZpcm9ubWVudApgYGB7cn0KIyBybShsaXN0ID0gbHMoKSkKYGBgCgojIyBMaWJyYXJ5IENhbGxzCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShMYWhtYW4pCmxpYnJhcnkocmVzaGFwZTIpCmxpYnJhcnkobWRzcikKbGlicmFyeShtdnRub3JtKQpsaWJyYXJ5KGZhY3RvZXh0cmEpCmxpYnJhcnkoY2x1c3RlcikKbGlicmFyeShsZWFwcykKbGlicmFyeShjYXJldCkKbGlicmFyeShJU0xSMikKYGBgCgojIyBMb2FkaW5nIERhdGEKYGBge3J9CkZ1bGxTdGF0cyA8LSByZWFkLmNzdigiRnVsbFN0YXRzLmNzdiIpCkZ1bGxTdGF0cyA8LQogIEZ1bGxTdGF0cyAlPiUKICByZW5hbWUoZGVhdGhzcGVyMTAwMDAwID0gRGVhdGhzLi4uY3VtdWxhdGl2ZS50b3RhbC5wZXIuMTAwMDAwLnBvcHVsYXRpb24sIGNhc2VzcGVyMTAwMDAwID0gQ2FzZXMuLi5jdW11bGF0aXZlLnRvdGFsLnBlci4xMDAwMDAucG9wdWxhdGlvbikKaGVhZChGdWxsU3RhdHMpClZhY2NpbmVEYXRhIDwtIHJlYWQuY3N2KCJ2YWNjaW5hdGlvbi1kYXRhLmNzdiIpCkZ1bGxTdGF0cyRnZHBjYXAgPC0gRnVsbFN0YXRzJGdkcGNhcC8xMDAwCkZ1bGxTdGF0cyRBaXJUcmFuc3BvcnQgPC0gRnVsbFN0YXRzJEFpclRyYW5zcG9ydC8xMDAwCkZ1bGxTdGF0cyRIZWFsdGhFeHBwQ2FwIDwtIEZ1bGxTdGF0cyRIZWFsdGhFeHBwQ2FwLzEwMApgYGAKCgoKIyBFeHBsb3JhdG9yeSBEYXRhIEFuYWx5c2lzCgojIyBDT1ZJRC0xOSBSYXRlcyBieSBHZW9ncmFwaGljYWwgUmVnaW9uCmBgYHtyfQpGdWxsU3RhdHMgJT4lCiAgZ3JvdXBfYnkoV0hPLlJlZ2lvbikgJT4lCiAgc3VtbWFyaXNlKGNvdW50cmllcyA9IG4oKSwgYXZnY292aWRjYXNlcyA9IG1lYW4odG90YWxjYXNlcyksIGF2Z2NvdmlkZGVhdGhzID0gbWVhbih0b3RhbGRlYXRocyksIGRlYXRocmF0ZSA9IChhdmdjb3ZpZGRlYXRocy9hdmdjb3ZpZGNhc2VzKSkKYGBgCgojIyBFeHBsb3JpbmcgRGVhdGggUmF0ZXMgdnMgT3RoZXIgUGFyYW1ldGVycwpgYGB7cn0KRnVsbFN0YXRzICU+JQogIGdncGxvdChhZXMoeCA9IChnZHBjYXApLCB5ID0gZGVhdGhyYXRlLCBuYS5ybSA9IFRSVUUpKSArCiAgZ2VvbV9wb2ludChhZXMoY29sb3IgPSBXSE8uUmVnaW9uKSkgCkZ1bGxTdGF0cyAlPiUKICBnZ3Bsb3QoYWVzKHggPSAodXJicG9wKSwgeSA9IGRlYXRocmF0ZSwgbmEucm0gPSBUUlVFKSkgKwogIGdlb21fcG9pbnQoYWVzKGNvbG9yID0gV0hPLlJlZ2lvbikpIApgYGAKCiMjIElkZW50aWZ5aW5nIE91dGxpZXJzCgpgYGB7cn0KaXNfb3V0bGllciA8LSBmdW5jdGlvbih4KSB7CiAgcmV0dXJuKHggPCBxdWFudGlsZSh4LCAwLjI1LCBuYS5ybSA9IFRSVUUpIC0gMS41ICogSVFSKHgsIG5hLnJtID0gVFJVRSkgfCAKICAgICAgICAgICAgIHggPiBxdWFudGlsZSh4LCAwLjc1LCBuYS5ybSA9IFRSVUUpICsgMS41ICogSVFSKHgsIG5hLnJtID0gVFJVRSkpCn0KYGBgCgpgYGB7cn0KdGVtcCA8LSBGdWxsU3RhdHMgJT4lCiAgICBncm91cF9ieShXSE8uUmVnaW9uKSAlPiUKICAgIG11dGF0ZShvdXRsaWVyID0gaWZfZWxzZShpc19vdXRsaWVyKGRlYXRocmF0ZSksIE5hbWUsIE5BX2NoYXJhY3Rlcl8pLAogICAgICAgICAgIG91dGxpZXJCaW4gPSBpc19vdXRsaWVyKGRlYXRocmF0ZSkpIApgYGAKCgpgYGB7cn0KIyBtYWluIGdyYXBoCmdncGxvdChkYXRhID0gdGVtcCwgYWVzKHggPSBmYWN0b3IoV0hPLlJlZ2lvbiksIHkgPSBkZWF0aHJhdGUsIAogICAgICAgICAgICAgICAgICAgICAgICBmaWxsID0gZmFjdG9yKFdITy5SZWdpb24pKSkgKwogICAgZ2VvbV9ib3hwbG90KGFlcyhjb2xvciA9IGZhY3RvcihXSE8uUmVnaW9uKSksIHNob3cubGVnZW5kID0gRkFMU0UpICsKICAgIGdlb21fYm94cGxvdChvdXRsaWVyLmNvbG9yID0gTkEpICsKICAgIGdlb21fdGV4dF9yZXBlbChhZXMobGFiZWwgPSBvdXRsaWVyKSwgbnVkZ2VfeSA9IDAuMDEsIG5hLnJtID0gVFJVRSwgCiAgICAgICAgICAgICAgICAgICAgc2hvdy5sZWdlbmQgPSBGQUxTRSwpICsKICAgIHRoZW1lKAogICAgICAgICMgbGFiZWwgc3R5bGluZ3MKICAgICAgICBheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChhbmdsZSA9IDMwLCB2anVzdCA9IDEsIGhqdXN0ID0gMSksCiAgICAgICAgcGxvdC50aXRsZSA9IGVsZW1lbnRfdGV4dChzaXplID0gMTUsIGZhY2UgPSAiYm9sZCIsIGhqdXN0ID0gMC41KSkgKwogICAgdGhlbWUoCiAgICAgICAgIyBsZWdlbmQgc3R5bGluZ3MKICAgICAgICBsZWdlbmQucG9zaXRpb24gPSBjKDAuOTc1LCAwLjk1KSwKICAgICAgICBsZWdlbmQuanVzdGlmaWNhdGlvbiA9IGMoInJpZ2h0IiwgInRvcCIpLAogICAgICAgIGxlZ2VuZC5ib3guYmFja2dyb3VuZCA9IGVsZW1lbnRfcmVjdChjb2xvciA9ICJibGFjayIpKSArCiAgICBsYWJzKHRpdGxlID0gIkRlYXRoIFJhdGVzIGFjcm9zcyBXSE8gUmVnaW9ucyIsIAogICAgICAgICB4ID0gIlJlZ2lvbiIsIHkgPSAiRGVhdGggUmF0ZSIsCiAgICAgICAgIGZpbGwgPSAiUmVnaW9uIikKYGBgCgojIyBNdWx0aXBsZSBMaW5lYXIgUmVncmVzc2lvbiAtIERlYXRocyBwZXIgMTAwMDAwCgpgYGB7cn0KIyBBbGwgVmFyaWFibGVzCmRlYXRocmF0ZS5maXQgPC0gbG0oZGF0YSA9IEZ1bGxTdGF0cywgZGVhdGhzcGVyMTAwMDAwIH4gdXJicG9wICsgQWdlRGVwZW5kYW5jeSArIEhvc3BpdGFsQmVkcyAgKyBnZHBjYXA6UG92ZXJ0eVJhdGUgKyB1cmJwb3A6SG9zcGl0YWxCZWRzICsgUG92ZXJ0eVJhdGU6SG9zcGl0YWxCZWRzICsgMCAsIG5hLnJtID0gVFJVRSkKc3VtbWFyeShkZWF0aHJhdGUuZml0KQpBSUMoZGVhdGhyYXRlLmZpdCkKYGBgCgpgYGB7cn0KIyAzNApkZWF0aHJhdGUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IGdkcGNhcCArIHVyYnBvcCAgKyBBaXJUcmFuc3BvcnQgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcyAgKyBnZHBjYXA6SGVhbHRoRXhwcENhcCArIGdkcGNhcDp1cmJwb3AgKyB1cmJwb3A6QWdlRGVwZW5kYW5jeSArIGdkcGNhcDpQb3ZlcnR5UmF0ZSArIHVyYnBvcDpIb3NwaXRhbEJlZHMgKyBQb3ZlcnR5UmF0ZTpIb3NwaXRhbEJlZHMgKyBBaXJUcmFuc3BvcnQ6Z2RwY2FwICsgMCAsIG5hLnJtID0gVFJVRSkKc3VtbWFyeShkZWF0aHJhdGUuZml0KQpBSUMoZGVhdGhyYXRlLmZpdCkKYGBgCgpgYGB7cn0KQWxsTW9kZWxzIDwtIG9sc19zdGVwX2FsbF9wb3NzaWJsZShkZWF0aHJhdGUuZml0KQpgYGAKCgojIE11bHRpcGxlIExpbmVhciBSZWdyZXNzaW9uIC0gQ2FzZXMgUGVyIDEwMDAwMApgYGB7cn0KIyBDYXNlIFJhdGUgLSBBbGwgVmFycwpjYXNlcmF0ZS5maXQgPC0gbG0oZGF0YSA9IEZ1bGxTdGF0c05BLCBjYXNlc3BlcjEwMDAwMCB+ICBnZHBjYXAgKyB1cmJwb3AgKyBIZWFsdGhFeHBwQ2FwICsgQWlyVHJhbnNwb3J0ICsgQWdlRGVwZW5kYW5jeSArIE1pbGl0YXJ5RXggKyBIb3NwaXRhbEJlZHMgKyBQb3ZlcnR5UmF0ZSwgbmEucm0gPSBUUlVFKQpzdW1tYXJ5KGNhc2VyYXRlLmZpdCkKCgoKYGBg</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAzODAgRmluYWwgUHJvamVjdCIKYXV0aG9yOiAiVHJpc3RhbiBaYW5vd2ljLCBFdmFuIFNwaW5uZXksIEp1bGlhbiBTaW0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMgRnJvbnQgTWF0dGVyCgojIyBDbGVhciBFbnZpcm9ubWVudApgYGB7cn0KIyBybShsaXN0ID0gbHMoKSkKYGBgCgojIyBMaWJyYXJ5IENhbGxzCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShMYWhtYW4pCmxpYnJhcnkocmVzaGFwZTIpCmxpYnJhcnkobWRzcikKbGlicmFyeShtdnRub3JtKQpsaWJyYXJ5KGZhY3RvZXh0cmEpCmxpYnJhcnkoY2x1c3RlcikKbGlicmFyeShsZWFwcykKbGlicmFyeShjYXJldCkKbGlicmFyeShJU0xSMikKYGBgCgojIyBMb2FkaW5nIERhdGEKYGBge3J9CkZ1bGxTdGF0cyA8LSByZWFkLmNzdigiRnVsbFN0YXRzLmNzdiIpCkZ1bGxTdGF0cyA8LQogIEZ1bGxTdGF0cyAlPiUKICByZW5hbWUoZGVhdGhzcGVyMTAwMDAwID0gRGVhdGhzLi4uY3VtdWxhdGl2ZS50b3RhbC5wZXIuMTAwMDAwLnBvcHVsYXRpb24sIGNhc2VzcGVyMTAwMDAwID0gQ2FzZXMuLi5jdW11bGF0aXZlLnRvdGFsLnBlci4xMDAwMDAucG9wdWxhdGlvbikKaGVhZChGdWxsU3RhdHMpClZhY2NpbmVEYXRhIDwtIHJlYWQuY3N2KCJ2YWNjaW5hdGlvbi1kYXRhLmNzdiIpCkZ1bGxTdGF0cyRnZHBjYXAgPC0gRnVsbFN0YXRzJGdkcGNhcC8xMDAwCkZ1bGxTdGF0cyRBaXJUcmFuc3BvcnQgPC0gRnVsbFN0YXRzJEFpclRyYW5zcG9ydC8xMDAwCkZ1bGxTdGF0cyRIZWFsdGhFeHBwQ2FwIDwtIEZ1bGxTdGF0cyRIZWFsdGhFeHBwQ2FwLzEwMApgYGAKCgoKIyBFeHBsb3JhdG9yeSBEYXRhIEFuYWx5c2lzCgojIyBDT1ZJRC0xOSBSYXRlcyBieSBHZW9ncmFwaGljYWwgUmVnaW9uCmBgYHtyfQpGdWxsU3RhdHMgJT4lCiAgZ3JvdXBfYnkoV0hPLlJlZ2lvbikgJT4lCiAgc3VtbWFyaXNlKGNvdW50cmllcyA9IG4oKSwgYXZnY292aWRjYXNlcyA9IG1lYW4odG90YWxjYXNlcyksIGF2Z2NvdmlkZGVhdGhzID0gbWVhbih0b3RhbGRlYXRocyksIGRlYXRocmF0ZSA9IChhdmdjb3ZpZGRlYXRocy9hdmdjb3ZpZGNhc2VzKSkKYGBgCgojIyBFeHBsb3JpbmcgRGVhdGggUmF0ZXMgdnMgT3RoZXIgUGFyYW1ldGVycwpgYGB7cn0KRnVsbFN0YXRzICU+JQogIGdncGxvdChhZXMoeCA9IChnZHBjYXApLCB5ID0gZGVhdGhyYXRlLCBuYS5ybSA9IFRSVUUpKSArCiAgZ2VvbV9wb2ludChhZXMoY29sb3IgPSBXSE8uUmVnaW9uKSkgCkZ1bGxTdGF0cyAlPiUKICBnZ3Bsb3QoYWVzKHggPSAodXJicG9wKSwgeSA9IGRlYXRocmF0ZSwgbmEucm0gPSBUUlVFKSkgKwogIGdlb21fcG9pbnQoYWVzKGNvbG9yID0gV0hPLlJlZ2lvbikpIApgYGAKCiMjIElkZW50aWZ5aW5nIE91dGxpZXJzCgpgYGB7cn0KaXNfb3V0bGllciA8LSBmdW5jdGlvbih4KSB7CiAgcmV0dXJuKHggPCBxdWFudGlsZSh4LCAwLjI1LCBuYS5ybSA9IFRSVUUpIC0gMS41ICogSVFSKHgsIG5hLnJtID0gVFJVRSkgfCAKICAgICAgICAgICAgIHggPiBxdWFudGlsZSh4LCAwLjc1LCBuYS5ybSA9IFRSVUUpICsgMS41ICogSVFSKHgsIG5hLnJtID0gVFJVRSkpCn0KYGBgCgpgYGB7cn0KdGVtcCA8LSBGdWxsU3RhdHMgJT4lCiAgICBncm91cF9ieShXSE8uUmVnaW9uKSAlPiUKICAgIG11dGF0ZShvdXRsaWVyID0gaWZfZWxzZShpc19vdXRsaWVyKGRlYXRocmF0ZSksIE5hbWUsIE5BX2NoYXJhY3Rlcl8pLAogICAgICAgICAgIG91dGxpZXJCaW4gPSBpc19vdXRsaWVyKGRlYXRocmF0ZSkpIApgYGAKCgpgYGB7cn0KIyBtYWluIGdyYXBoCmdncGxvdChkYXRhID0gdGVtcCwgYWVzKHggPSBmYWN0b3IoV0hPLlJlZ2lvbiksIHkgPSBkZWF0aHJhdGUsIAogICAgICAgICAgICAgICAgICAgICAgICBmaWxsID0gZmFjdG9yKFdITy5SZWdpb24pKSkgKwogICAgZ2VvbV9ib3hwbG90KGFlcyhjb2xvciA9IGZhY3RvcihXSE8uUmVnaW9uKSksIHNob3cubGVnZW5kID0gRkFMU0UpICsKICAgIGdlb21fYm94cGxvdChvdXRsaWVyLmNvbG9yID0gTkEpICsKICAgIGdlb21fdGV4dF9yZXBlbChhZXMobGFiZWwgPSBvdXRsaWVyKSwgbnVkZ2VfeSA9IDAuMDEsIG5hLnJtID0gVFJVRSwgCiAgICAgICAgICAgICAgICAgICAgc2hvdy5sZWdlbmQgPSBGQUxTRSwpICsKICAgIHRoZW1lKAogICAgICAgICMgbGFiZWwgc3R5bGluZ3MKICAgICAgICBheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChhbmdsZSA9IDMwLCB2anVzdCA9IDEsIGhqdXN0ID0gMSksCiAgICAgICAgcGxvdC50aXRsZSA9IGVsZW1lbnRfdGV4dChzaXplID0gMTUsIGZhY2UgPSAiYm9sZCIsIGhqdXN0ID0gMC41KSkgKwogICAgdGhlbWUoCiAgICAgICAgIyBsZWdlbmQgc3R5bGluZ3MKICAgICAgICBsZWdlbmQucG9zaXRpb24gPSBjKDAuOTc1LCAwLjk1KSwKICAgICAgICBsZWdlbmQuanVzdGlmaWNhdGlvbiA9IGMoInJpZ2h0IiwgInRvcCIpLAogICAgICAgIGxlZ2VuZC5ib3guYmFja2dyb3VuZCA9IGVsZW1lbnRfcmVjdChjb2xvciA9ICJibGFjayIpKSArCiAgICBsYWJzKHRpdGxlID0gIkRlYXRoIFJhdGVzIGFjcm9zcyBXSE8gUmVnaW9ucyIsIAogICAgICAgICB4ID0gIlJlZ2lvbiIsIHkgPSAiRGVhdGggUmF0ZSIsCiAgICAgICAgIGZpbGwgPSAiUmVnaW9uIikKYGBgCgojIyBNdWx0aXBsZSBMaW5lYXIgUmVncmVzc2lvbiAtIERlYXRocyBwZXIgMTAwMDAwCgpgYGB7cn0KIyBBbGwgVmFyaWFibGVzIEhpZ2h5bCBTaWduaWZpY2FudApkZWF0aHJhdGUuZml0IDwtIGxtKGRhdGEgPSBGdWxsU3RhdHMsIGRlYXRoc3BlcjEwMDAwMCB+IHVyYnBvcCArIEFnZURlcGVuZGFuY3kgKyBIb3NwaXRhbEJlZHMgICsgZ2RwY2FwOlBvdmVydHlSYXRlICsgdXJicG9wOkhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlOkhvc3BpdGFsQmVkcyArIDAgLCBuYS5ybSA9IFRSVUUpCnN1bW1hcnkoZGVhdGhyYXRlLmZpdCkKQUlDKGRlYXRocmF0ZS5maXQpCmBgYAoKYGBge3J9CiMgMzQKZGVhdGhyYXRlLmZpdCA8LSBsbShkYXRhID0gRnVsbFN0YXRzLCBkZWF0aHNwZXIxMDAwMDAgfiBnZHBjYXAgKyB1cmJwb3AgICsgQWlyVHJhbnNwb3J0ICsgQWdlRGVwZW5kYW5jeSArIE1pbGl0YXJ5RXggKyBIb3NwaXRhbEJlZHMgICArIHVyYnBvcDpBZ2VEZXBlbmRhbmN5ICsgZ2RwY2FwOlBvdmVydHlSYXRlICsgdXJicG9wOkhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlOkhvc3BpdGFsQmVkcyArIEFpclRyYW5zcG9ydDpnZHBjYXAgKyAwICwgbmEucm0gPSBUUlVFKQpzdW1tYXJ5KGRlYXRocmF0ZS5maXQpCkFJQyhkZWF0aHJhdGUuZml0KQpgYGAKCmBgYHtyfQpBbGxNb2RlbHMgPC0gb2xzX3N0ZXBfYWxsX3Bvc3NpYmxlKGRlYXRocmF0ZS5maXQpCmBgYAoKCiMgTXVsdGlwbGUgTGluZWFyIFJlZ3Jlc3Npb24gLSBDYXNlcyBQZXIgMTAwMDAwCmBgYHtyfQojIENhc2UgUmF0ZSAtIEFsbCBWYXJzCmNhc2VyYXRlLmZpdCA8LSBsbShkYXRhID0gRnVsbFN0YXRzTkEsIGNhc2VzcGVyMTAwMDAwIH4gIGdkcGNhcCArIHVyYnBvcCArIEhlYWx0aEV4cHBDYXAgKyBBaXJUcmFuc3BvcnQgKyBBZ2VEZXBlbmRhbmN5ICsgTWlsaXRhcnlFeCArIEhvc3BpdGFsQmVkcyArIFBvdmVydHlSYXRlLCBuYS5ybSA9IFRSVUUpCnN1bW1hcnkoY2FzZXJhdGUuZml0KQoKCgpgYGA=</div>
 
 
 

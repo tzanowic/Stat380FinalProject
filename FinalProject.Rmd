@@ -101,7 +101,7 @@ ggplot(data = temp, aes(x = factor(WHO.Region), y = deathrate,
 ## Multiple Linear Regression - Deaths per 100000
 
 ```{r}
-# All Variables
+# All Variables Highyl Significant
 deathrate.fit <- lm(data = FullStats, deathsper100000 ~ urbpop + AgeDependancy + HospitalBeds  + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 0 , na.rm = TRUE)
 summary(deathrate.fit)
 AIC(deathrate.fit)
@@ -109,7 +109,7 @@ AIC(deathrate.fit)
 
 ```{r}
 # 34
-deathrate.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop  + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds  + gdpcap:HealthExppCap + gdpcap:urbpop + urbpop:AgeDependancy + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + AirTransport:gdpcap + 0 , na.rm = TRUE)
+deathrate.fit <- lm(data = FullStats, deathsper100000 ~ gdpcap + urbpop  + AirTransport + AgeDependancy + MilitaryEx + HospitalBeds   + urbpop:AgeDependancy + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + AirTransport:gdpcap + 0 , na.rm = TRUE)
 summary(deathrate.fit)
 AIC(deathrate.fit)
 ```
