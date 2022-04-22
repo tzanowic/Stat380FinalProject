@@ -102,7 +102,7 @@ ggplot(data = temp, aes(x = factor(WHO.Region), y = deathrate,
 ## Multiple Linear Regression - Deaths per 100000
 
 ```{r}
-# All Variables Highyl Significant
+# All Variables Highly Significant - 6 Variables
 deathrate.fit <- lm(data = FullStats, deathsper100000 ~ urbpop + AgeDependancy + HospitalBeds  + gdpcap:PovertyRate + urbpop:HospitalBeds + PovertyRate:HospitalBeds + 0 , na.rm = TRUE)
 summary(deathrate.fit)
 AIC(deathrate.fit)
@@ -143,17 +143,7 @@ plot(reg.summary$bic ,xlab="Number of Variables ",ylab="BIC",type='l')
 min_bic <- which.min(reg.summary$bic)
 points(min_bic,reg.summary$bic[min_bic],col="red",cex=2,pch=20)
 ```
-```{r}
-# 6 is best number of variables
-deathrate6.fit <- lm(data = FullStats, deathsper100000 ~ urbpop + HospitalBeds + gdpcap:PovertyRate + urbpop:HospitalBeds + urbpop:PovertyRate + gdpcap:AgeDependancy + 0, na.rm = TRUE)
-summary(deathrate6.fit)
-AIC(deathrate6.fit)
-```
 
-
-```{r}
-#AllModels <- ols_step_all_possible(deathrate.fit)
-```
 
 
 # Multiple Linear Regression - Cases Per 100000
