@@ -144,6 +144,10 @@ min_bic <- which.min(reg.summary$bic)
 points(min_bic,reg.summary$bic[min_bic],col="red",cex=2,pch=20)
 ```
 
+```{r}
+par(mfrow = c(2,2))
+plot(deathrate.fit)
+```
 
 
 # Multiple Linear Regression - Cases Per 100000
