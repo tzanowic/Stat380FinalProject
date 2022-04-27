@@ -24,6 +24,7 @@ library(leaps)
 library(caret)
 library(ISLR2)
 library(ggrepel)
+library(maps)
 ```
 
 ## Loading Data
@@ -98,6 +99,33 @@ ggplot(data = temp, aes(x = factor(WHO.Region), y = deathrate,
          x = "Region", y = "Death Rate",
          fill = "Region")
 ```
+
+## World Map Info
+
+```{r}
+worldmap <- map_data("world")
+worldmap <- worldmap %>%
+  left_join(FullStats, by = c("region" = "Name"))
+
+# This is super adjustable for whatever variable you'd like to put in
+# make sure to adjust the labels, \n to avoid squashing the plot
+
+ggplot(data = worldmap, aes(x = long, y = lat, fill = deathsper100000 + 1, group = group)) +
+         geom_polygon(color = "gray") + ggtitle("Deaths per 100,000 Around The World") +
+    scale_fill_continuous(type = "viridis") +
+    labs(title = "Death Rates across the World", 
+         x = "Longitude", y = "Latitude",
+         fill = "Death\nRates") # escaping new lines
+
+ggplot(data = worldmap, aes(x = long, y = lat, fill = HospitalBeds + 1, group = group)) +
+         geom_polygon(color = "gray") + 
+    scale_fill_continuous(type = "viridis") +
+    labs(title = "Hospital Beds across the World", 
+         x = "Longitude", y = "Latitude",
+         fill = "Hospital\nBed\nCounts") # escaping new lines
+
+```
+
 
 ## Multiple Linear Regression - Deaths per 100000
 
